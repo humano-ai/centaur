@@ -135,6 +135,8 @@ export type SlackbotV2Options = {
   /** Enable Slack's Agent messaging experience. Must match the app manifest. */
   agentViewEnabled?: boolean
   assistantStatus?: string
+  /** Rotating loading lines Slack shows under the thinking status (max 10). */
+  assistantLoadingMessages?: string[]
   /**
    * When enabled, session.activity_summary events update Slack's assistant
    * status and structured task output is hidden from the Slack stream.

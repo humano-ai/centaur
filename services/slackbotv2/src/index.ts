@@ -3738,7 +3738,7 @@ async function setAssistantStatus(
           target.channel,
           target.threadTs,
           normalizedStatus,
-          normalizedStatus ? [normalizedStatus] : undefined
+          assistantLoadingMessages(normalizedStatus, status, options)
         )
       )
     )
@@ -3762,6 +3762,24 @@ async function setAssistantStatus(
   } finally {
     stopPendingLog()
   }
+}
+
+/**
+ * Loading lines for a status update. The initial "thinking" status rotates the
+ * configured loading messages; any other status (activity summaries) shows as
+ * its own single line.
+ */
+export function assistantLoadingMessages(
+  normalizedStatus: string,
+  status: string,
+  options?: Pick<SlackbotV2Options, 'assistantLoadingMessages' | 'assistantStatus'>
+): string[] | undefined {
+  if (!normalizedStatus) return undefined
+  const configured = options?.assistantLoadingMessages
+  if (configured?.length && status === (options?.assistantStatus ?? 'Thinking...')) {
+    return configured.map(normalizeAssistantStatus)
+  }
+  return [normalizedStatus]
 }
 
 function normalizeAssistantStatus(status: string): string {

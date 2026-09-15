@@ -108,6 +108,10 @@ spec:
             - name: CENTAUR_CONSOLE_PUBLIC_URL
               value: {{ $console.publicUrl | quote }}
 {{- end }}
+{{- if .Values.slackbotv2.assistantLoadingMessages }}
+            - name: SLACKBOTV2_ASSISTANT_LOADING_MESSAGES
+              value: {{ .Values.slackbotv2.assistantLoadingMessages | toJson | quote }}
+{{- end }}
 {{- if .Values.slackbotv2.assistantStatus }}
             - name: SLACKBOTV2_ASSISTANT_STATUS
               value: {{ .Values.slackbotv2.assistantStatus | quote }}

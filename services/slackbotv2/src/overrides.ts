@@ -281,9 +281,7 @@ export function validateStrategyOverrides(
         : undefined
   }
 
-  const personaId = cleanString(raw.persona)
-
-  return { harnessType, model, personaId, provider, reasoning }
+  return { harnessType, model, provider, reasoning }
 }
 
 /**

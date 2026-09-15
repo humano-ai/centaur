@@ -49,6 +49,7 @@ const options: SlackbotV2Options = {
   agentViewEnabled: booleanEnv('SLACKBOTV2_AGENT_VIEW_ENABLED', false),
   apiKey: optionalEnv('SLACKBOT_API_KEY'),
   assistantStatus: optionalEnv('SLACKBOTV2_ASSISTANT_STATUS'),
+  assistantLoadingMessages: parseLoadingMessages(optionalEnv('SLACKBOTV2_ASSISTANT_LOADING_MESSAGES')),
   activitySummaryStatusEnabled: booleanEnv('SLACKBOTV2_ACTIVITY_SUMMARY_STATUS_ENABLED', false),
   autoJoinCreatedChannels: booleanEnv('SLACKBOTV2_AUTO_JOIN_CREATED_CHANNELS', false),
   botToken,
@@ -130,6 +131,22 @@ console.log(
     api_url: apiUrl
   })
 )
+
+/** JSON array of strings; Slack rotates up to 10 loading messages. */
+function parseLoadingMessages(raw: string | undefined): string[] | undefined {
+  if (!raw) return undefined
+  try {
+    const parsed: unknown = JSON.parse(raw)
+    if (!Array.isArray(parsed)) return undefined
+    const messages = parsed
+      .filter((item): item is string => typeof item === 'string' && item.trim() !== '')
+      .slice(0, 10)
+    return messages.length > 0 ? messages : undefined
+  } catch {
+    console.warn('SLACKBOTV2_ASSISTANT_LOADING_MESSAGES is not a JSON array of strings; ignoring')
+    return undefined
+  }
+}
 
 function optionalEnv(name: string): string | undefined {
   const value = process.env[name]?.trim()
