@@ -29,6 +29,20 @@ describe('parseChannelDefaults', () => {
     })
   })
 
+  test('accepts a persona, alone or alongside harness fields', () => {
+    expect(
+      parseChannelDefaults(
+        JSON.stringify({
+          C0BUMI: { persona: 'bumi', harness: 'codex' },
+          C0DOCS: { persona: ' docs ' }
+        })
+      )
+    ).toEqual({
+      C0BUMI: { harnessType: 'codex', personaId: 'bumi' },
+      C0DOCS: { personaId: 'docs' }
+    })
+  })
+
   test('allows reasoning alone, with no harness or model', () => {
     expect(parseChannelDefaults(JSON.stringify({ C0TRIAGE: { reasoning: 'low' } }))).toEqual({
       C0TRIAGE: { reasoning: 'low' }

@@ -281,7 +281,9 @@ export function validateStrategyOverrides(
         : undefined
   }
 
-  return { harnessType, model, provider, reasoning }
+  const personaId = cleanString(raw.persona)
+
+  return { harnessType, model, personaId, provider, reasoning }
 }
 
 /**
@@ -293,7 +295,7 @@ export function validateStrategyOverrides(
  * dropped.
  */
 export function normalizeHarnessOverrides(
-  raw: { harness?: unknown; model?: unknown; provider?: unknown; reasoning?: unknown },
+  raw: { harness?: unknown; model?: unknown; persona?: unknown; provider?: unknown; reasoning?: unknown },
   onError?: (message: string) => void
 ): HarnessOverrides {
   let harnessType: string | undefined
@@ -328,7 +330,9 @@ export function normalizeHarnessOverrides(
     if (!reasoning) onError?.(`unknown reasoning effort "${reasoningRaw}"`)
   }
 
-  return { harnessType, model, provider, reasoning }
+  const personaId = cleanString(raw.persona)
+
+  return { harnessType, model, personaId, provider, reasoning }
 }
 
 function cleanString(value: unknown): string | undefined {

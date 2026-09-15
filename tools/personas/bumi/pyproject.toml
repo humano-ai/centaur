@@ -1,0 +1,9 @@
+[project]
+name = "bumi"
+description = "Bumi engineering persona — #bumi Slack requests to verified PRs on humano-ai/bumi"
+version = "0.1.0"
+
+[tool.centaur]
+type = "persona"
+engine = "codex"
+prompt = "PROMPT.md"

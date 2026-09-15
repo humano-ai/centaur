@@ -1,5 +1,5 @@
 /**
- * Per-channel default harness / model / provider / reasoning. Loaded from the
+ * Per-channel default harness / model / persona / provider / reasoning. Loaded from the
  * `SLACKBOTV2_CHANNEL_DEFAULTS` env var: JSON keyed by Slack conversation id,
  * each value an object normalized like the inline flags (see
  * `normalizeHarnessOverrides`):
@@ -7,11 +7,13 @@
  *   SLACKBOTV2_CHANNEL_DEFAULTS='{
  *     "C0ENG":     {"harness": "claude", "model": "opus", "reasoning": "high"},
  *     "C0TRIAGE":  {"reasoning": "low"},
+ *     "C0BUMI":    {"persona": "bumi"},
  *     "C0BEDROCK": {"provider": "bedrock", "model": "gpt-5.2"}
  *   }'
  *
  * Fields are independent. Precedence (in index.ts): per-thread override, then
- * channel default, then deployment default. Setting `harness` restarts a thread
+ * channel default, then deployment default. `persona` only applies when the
+ * thread's session is created; the API pins it afterwards. Setting `harness` restarts a thread
  * onto it like `--claude`/`--codex`; `reasoning` affects Codex and Nanocodex.
  */
 
@@ -46,12 +48,18 @@ export function parseChannelDefaults(
     const key = channelId.trim()
     if (!key) continue
     if (!isPlainObject(rawEntry)) {
-      onError?.(`channel ${key}: expected an object of harness/model/provider/reasoning fields`)
+      onError?.(`channel ${key}: expected an object of harness/model/persona/provider/reasoning fields`)
       continue
     }
     const overrides = normalizeHarnessOverrides(rawEntry, message => onError?.(`channel ${key}: ${message}`))
-    if (!overrides.harnessType && !overrides.model && !overrides.provider && !overrides.reasoning) {
-      onError?.(`channel ${key}: no usable harness/model/provider/reasoning fields`)
+    if (
+      !overrides.harnessType &&
+      !overrides.model &&
+      !overrides.personaId &&
+      !overrides.provider &&
+      !overrides.reasoning
+    ) {
+      onError?.(`channel ${key}: no usable harness/model/persona/provider/reasoning fields`)
       continue
     }
     result[key] = overrides

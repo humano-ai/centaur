@@ -1406,7 +1406,9 @@ async function syncThreadMessageToSession(
     messages: messagesToAppend,
     model: shouldStartExecution ? resolvedModel : undefined,
     metadataModel: shouldStartExecution ? effectiveModel : undefined,
-    personaId: shouldStartExecution ? effectiveOverrides.personaId : undefined,
+    personaId: shouldStartExecution
+      ? effectiveOverrides.personaId ?? channelDefault?.personaId
+      : undefined,
     provider: shouldStartExecution ? resolvedProvider : undefined,
     reasoning: resolvedReasoning,
     restartOnHarnessConflict:
