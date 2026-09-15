@@ -108,6 +108,8 @@ spec:
             - name: CENTAUR_CONSOLE_PUBLIC_URL
               value: {{ $console.publicUrl | quote }}
 {{- end }}
+            - name: SLACKBOTV2_THREAD_REPLIES_WITHOUT_MENTION
+              value: {{ .Values.slackbotv2.threadRepliesWithoutMention | default false | quote }}
 {{- if .Values.slackbotv2.assistantLoadingMessages }}
             - name: SLACKBOTV2_ASSISTANT_LOADING_MESSAGES
               value: {{ .Values.slackbotv2.assistantLoadingMessages | toJson | quote }}

@@ -618,6 +618,9 @@ slackbotv2:
   # Rotating loading lines shown under the initial thinking status (max 10).
   # Empty shows the status text itself.
   assistantLoadingMessages: []
+  # Continue a channel thread the bot already joined on every human reply,
+  # without requiring another @mention.
+  threadRepliesWithoutMention: false
   # Match Slack's features.agent_view manifest setting. Changing Slack's
   # manifest is irreversible; this switch only controls the service behavior.
   agentViewEnabled: false

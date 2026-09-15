@@ -494,7 +494,7 @@ export function createSlackbotV2(options: SlackbotV2Options): SlackbotV2 {
   chat.onSubscribedMessage(async (thread, message) => {
     if (!(await isAllowedSlackMessage(message, options, logger))) return
     if (slackRichTextMentionsUser(message.raw, options.botUserId)) message.isMention = true
-    if (message.isMention !== true) {
+    if (message.isMention !== true && !options.threadRepliesWithoutMention) {
       traceLog(
         options,
         'slackbotv2_subscribed_message_without_mention_ignored',

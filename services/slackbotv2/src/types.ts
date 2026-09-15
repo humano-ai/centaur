@@ -135,6 +135,8 @@ export type SlackbotV2Options = {
   /** Enable Slack's Agent messaging experience. Must match the app manifest. */
   agentViewEnabled?: boolean
   assistantStatus?: string
+  /** Treat every human reply in a thread the bot already joined as a new turn, mention or not. */
+  threadRepliesWithoutMention?: boolean
   /** Rotating loading lines Slack shows under the thinking status (max 10). */
   assistantLoadingMessages?: string[]
   /**

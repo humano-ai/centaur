@@ -605,6 +605,59 @@ describe('slackbotv2', () => {
     expect(codexApi.workflowEvents).toHaveLength(1)
   })
 
+  it('executes unmentioned thread replies when threadRepliesWithoutMention is on', async () => {
+    bot = createTestBot({ threadRepliesWithoutMention: true })
+    const parent = await postUserMessage('Context for the thread.')
+    const mention = await postUserMessage(`<@${BOT_USER_ID}> start here`, parent.ts)
+    const waits: Promise<unknown>[] = []
+    await bot.app.request(
+      '/api/webhooks/slack',
+      signedSlackEvent({
+        event_id: 'Ev-slackbotv2-no-mention-first',
+        event: {
+          type: 'app_mention',
+          user: USER_ID,
+          channel: CHANNEL_ID,
+          team: TEAM_ID,
+          ts: mention.ts,
+          thread_ts: parent.ts,
+          text: `<@${BOT_USER_ID}> start here`
+        }
+      }),
+      {},
+      waitUntilContext(waits)
+    )
+    await Promise.all(waits)
+
+    const followUp = await postUserMessage('and also check the dealer app', parent.ts)
+    const followUpWaits: Promise<unknown>[] = []
+    const response = await bot.app.request(
+      '/api/webhooks/slack',
+      signedSlackEvent({
+        event_id: 'Ev-slackbotv2-no-mention-follow-up',
+        event: {
+          type: 'message',
+          user: USER_ID,
+          channel: CHANNEL_ID,
+          team: TEAM_ID,
+          ts: followUp.ts,
+          thread_ts: parent.ts,
+          text: 'and also check the dealer app'
+        }
+      }),
+      {},
+      waitUntilContext(followUpWaits)
+    )
+
+    expect(response.status).toBe(200)
+    await Promise.all(followUpWaits)
+    expect(codexApi.executes).toHaveLength(2)
+    expect(codexApi.creates.map(create => create.threadKey)).toEqual([
+      threadKey(parent.ts),
+      threadKey(parent.ts)
+    ])
+  })
+
   it('collects ignored subscribed messages when the bot is next mentioned', async () => {
     const parent = await postUserMessage('The deploy context is above.')
     const firstMention = await postUserMessage(

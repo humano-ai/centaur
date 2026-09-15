@@ -49,6 +49,7 @@ const options: SlackbotV2Options = {
   agentViewEnabled: booleanEnv('SLACKBOTV2_AGENT_VIEW_ENABLED', false),
   apiKey: optionalEnv('SLACKBOT_API_KEY'),
   assistantStatus: optionalEnv('SLACKBOTV2_ASSISTANT_STATUS'),
+  threadRepliesWithoutMention: booleanEnv('SLACKBOTV2_THREAD_REPLIES_WITHOUT_MENTION', false),
   assistantLoadingMessages: parseLoadingMessages(optionalEnv('SLACKBOTV2_ASSISTANT_LOADING_MESSAGES')),
   activitySummaryStatusEnabled: booleanEnv('SLACKBOTV2_ACTIVITY_SUMMARY_STATUS_ENABLED', false),
   autoJoinCreatedChannels: booleanEnv('SLACKBOTV2_AUTO_JOIN_CREATED_CHANNELS', false),
