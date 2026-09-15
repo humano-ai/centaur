@@ -56,7 +56,7 @@ A PR without these is incomplete.
   - Adding a constructor dependency breaks specs that instantiate the service by hand (`new DealersService(prisma, null, ...)`). Updating those call sites is required, but keep the edit to the constructor line.
   - **CI runs API integration tests (`apps/api/test/integration/*.int-spec.ts`) that hand-build Nest modules with explicit provider lists.** A new constructor arg fails DI there even when every unit suite is green. The error is `Nest can't resolve dependencies of X … argument Y at index [n]`, followed by a noise error, `Cannot read properties of undefined (reading 'close')`. This is the most common CI failure on this repo.
   - If you change ANY service constructor, grep `apps/api/src`, `apps/api/test`, `packages` and `tests` for hand-built modules.
-  - Then run the integration suite against `postgres:16-alpine`: `DATABASE_URL=… pnpm test:integration` from `apps/api`. Expect 20 suites and 168 tests. Some services need `eventEmitterProvider` as `buildTestModule`'s second argument; see `document-resubmission.int-spec.ts`.
+  - Then run the integration suite against Postgres 16: `DATABASE_URL=… pnpm test:integration` from `apps/api`. Use `docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres:16-alpine` if Docker works in your sandbox; otherwise `sudo apt-get install -y postgresql` and start it with `pg_ctlcluster`. Expect 20 suites and 168 tests. Some services need `eventEmitterProvider` as `buildTestModule`'s second argument; see `document-resubmission.int-spec.ts`.
   - Delete the untracked `apps/api/storage/` it leaves behind.
 
 ## 4. Repo conventions and known traps
