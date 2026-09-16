@@ -53,10 +53,11 @@ A PR without these is incomplete.
   - Then from `tests/e2e`: `OPS_BASE_URL=... / DEALER_BASE_URL=... npx playwright test <spec> --config playwright.no-setup.config.ts`.
   - All tests must be green.
   - If the Playwright browser is missing, run `npx playwright install chromium`. If that is blocked by egress, say so in the thread rather than skipping the evidence silently.
-- **Embed the screenshots INLINE in the PR body.** Committed PNGs alone are not enough.
-  - Use `gh pr create` / `gh pr edit` with repeatable `--attach './path/shot.png#what it proves'`. The files become GitHub user-attachments, which render in the private repo and survive branch deletion.
-  - Caption each shot with what it *proves*, not the filename. Videos (mp4/mov/webm ≤10MB) work the same way.
-  - Never use `raw.githubusercontent.com` links (they 404 on a private repo), and never link images by branch name.
+- **Embed the screenshots INLINE in the PR body.** Committed PNGs alone are not enough; a reviewer must see them in the PR.
+  - You push as the `fyndry` GitHub App, and **`gh pr create --attach` rejects App tokens** (the user-attachments upload needs a user token). Don't spend a cycle on it.
+  - So: commit the PNGs, `git push`, take `git rev-parse HEAD`, and reference them with a **full 40-character sha** — `<img width="900" alt="what it proves" src="https://github.com/humano-ai/bumi/blob/<FULL_SHA>/tests/e2e/evidence/<date>-<slug>/<file>.png?raw=true">`. Never a branch name (squash-merge deletes the branch and the images 404) and never `raw.githubusercontent.com` (it 404s on a private repo).
+  - Caption each shot with what it *proves*, not the filename. For a before/after pair, label them `Before` and `After`.
+  - You can also drop the same files into the Slack thread with `slack-post upload <channel-id> <path> --thread-ts <thread-ts>`.
 - **Prove the spec is non-vacuous.** Stash the fix, confirm the new tests fail, then restore the fix. A spec that passes both ways proves nothing.
 - **Re-run adjacent existing specs** for the same surface and keep them green. Update selectors only for legitimate moves, and never weaken assertions. Re-runs rewrite *other* specs' evidence PNGs (byte-different, visually identical), so `git checkout` those back and keep your diff to your own.
 - **Gates:**

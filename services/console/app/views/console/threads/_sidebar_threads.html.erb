@@ -50,7 +50,7 @@
       <% latest_message = @console_sidebar_latest_messages[thread.thread_key] %>
       <% title = console_sidebar_thread_title(thread, latest_message) %>
       <%= link_to console_threads_path(thread: thread.thread_key),
-                  class: "console-thread-link #{open_thread ? "console-thread-link-open" : ""} #{index >= 5 && !open_thread ? "console-thread-link-hidden" : ""}",
+                  class: "console-thread-link #{open_thread ? "console-thread-link-open" : ""}",
                   data: {
                     console_thread_link: true,
                     turbo_frame: "_top",
@@ -63,14 +63,6 @@
       <% end %>
         </div>
       </div>
-    <% end %>
-    <% if @console_sidebar_threads.size > 5 %>
-      <button type="button"
-              class="console-thread-show-all"
-              data-console-thread-show-more
-              data-page-size="5">
-        Show more
-      </button>
     <% end %>
   <% end %>
 <% end %>
