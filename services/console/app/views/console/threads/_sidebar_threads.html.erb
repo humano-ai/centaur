@@ -54,6 +54,8 @@
                   data: {
                     console_thread_link: true,
                     turbo_frame: "_top",
+                    console_thread_key: thread.thread_key,
+                    console_thread_title: title,
                     console_pane_index: (pane_index + 1 if open_thread && open_thread_keys.size > 1)
                   }.compact,
                   title: title do %>

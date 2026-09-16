@@ -332,6 +332,56 @@
         background: var(--border-seam);
       }
 
+      .console-thread-context {
+        position: fixed;
+        z-index: 60;
+        min-width: 11rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--popover);
+        box-shadow: var(--shadow-lg, 0 10px 30px -10px rgb(0 0 0 / 0.35));
+        padding: 0.25rem;
+      }
+
+      .console-thread-context[hidden] {
+        display: none;
+      }
+
+      .console-thread-context-title {
+        overflow: hidden;
+        padding: 0.375rem 0.5rem 0.25rem;
+        color: var(--subtle-foreground);
+        font-size: var(--text-2xs, 0.625rem);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .console-thread-context-item {
+        display: block;
+        width: 100%;
+        border-radius: var(--radius-sm);
+        padding: 0.3125rem 0.5rem;
+        color: var(--popover-foreground);
+        font-size: var(--text-sm, 0.8125rem);
+        text-align: left;
+      }
+
+      .console-thread-context-item:hover,
+      .console-thread-context-item:focus-visible {
+        background: var(--state-hover);
+        outline: none;
+      }
+
+      .console-thread-context-sep {
+        height: 1px;
+        margin: 0.25rem 0.25rem;
+        background: var(--border-seam);
+      }
+
+      .console-thread-link-archived {
+        display: none;
+      }
+
       .console-channel-toggle {
         display: flex;
         width: 100%;
@@ -1677,6 +1727,20 @@
           </div>
 
           <% if acting_admin? %>
+            <%# Right-click menu for sidebar threads (bb's context popup). Actions
+                are limited to what the deployment can actually do: open, open in
+                Slack, copy link, and archive (a local hide). There is no session
+                delete in the API, so none is offered. %>
+            <div class="console-thread-context" data-console-thread-context hidden role="menu">
+              <div class="console-thread-context-title" data-console-context-title></div>
+              <button type="button" class="console-thread-context-item" data-console-context-action="open" role="menuitem">Open</button>
+              <button type="button" class="console-thread-context-item" data-console-context-action="pane" role="menuitem">Open in split pane</button>
+              <button type="button" class="console-thread-context-item" data-console-context-action="slack" role="menuitem">Open in Slack</button>
+              <button type="button" class="console-thread-context-item" data-console-context-action="copy" role="menuitem">Copy link</button>
+              <div class="console-thread-context-sep"></div>
+              <button type="button" class="console-thread-context-item" data-console-context-action="archive" role="menuitem">Archive</button>
+            </div>
+
             <div class="console-thread-group">
               <a href="<%= console_workflows_path %>"
                  class="console-thread-group-title <%= "console-thread-group-title-active" if workflows_view %>"
@@ -1926,6 +1990,122 @@
       })();
 
       (() => {
+        // Right-click menu for sidebar threads.
+        const ARCHIVED_KEY = "console:archived-threads";
+        const archivedThreads = () => {
+          try {
+            return new Set(JSON.parse(window.localStorage.getItem(ARCHIVED_KEY) || "[]"));
+          } catch {
+            return new Set();
+          }
+        };
+        const persistArchived = set => {
+          try {
+            window.localStorage.setItem(ARCHIVED_KEY, JSON.stringify([...set]));
+          } catch {
+            /* private mode: archiving lasts for this page only */
+          }
+        };
+        const syncArchivedThreads = () => {
+          const archived = archivedThreads();
+          document.querySelectorAll("[data-console-thread-key]").forEach(link => {
+            const key = link.getAttribute("data-console-thread-key");
+            link.classList.toggle("console-thread-link-archived", archived.has(key) && !link.classList.contains("console-thread-link-open"));
+          });
+        };
+        window.__consoleSyncArchivedThreads = syncArchivedThreads;
+
+        if (!window.__consoleThreadContextBound) {
+          window.__consoleThreadContextBound = true;
+          let contextLink = null;
+          const menu = () => document.querySelector("[data-console-thread-context]");
+          const closeMenu = () => {
+            const element = menu();
+            if (element) element.hidden = true;
+            contextLink = null;
+          };
+          document.addEventListener("contextmenu", event => {
+            const target = event.target instanceof Element ? event.target : null;
+            const link = target?.closest("[data-console-thread-key]");
+            const element = menu();
+            if (!link || !element) return;
+            event.preventDefault();
+            contextLink = link;
+            const title = element.querySelector("[data-console-context-title]");
+            if (title) title.textContent = link.getAttribute("data-console-thread-title") || "Chat";
+            const archiveItem = element.querySelector("[data-console-context-action='archive']");
+            if (archiveItem) {
+              archiveItem.textContent = archivedThreads().has(link.getAttribute("data-console-thread-key"))
+                ? "Unarchive"
+                : "Archive";
+            }
+            element.hidden = false;
+            // Keep the popup inside the viewport.
+            const rect = element.getBoundingClientRect();
+            const x = Math.min(event.clientX, window.innerWidth - rect.width - 8);
+            const y = Math.min(event.clientY, window.innerHeight - rect.height - 8);
+            element.style.left = `${Math.max(8, x)}px`;
+            element.style.top = `${Math.max(8, y)}px`;
+          });
+          document.addEventListener("click", event => {
+            const target = event.target instanceof Element ? event.target : null;
+            const item = target?.closest("[data-console-context-action]");
+            if (!item) {
+              if (!target?.closest("[data-console-thread-context]")) closeMenu();
+              return;
+            }
+            const link = contextLink;
+            if (!link) return closeMenu();
+            const key = link.getAttribute("data-console-thread-key") || "";
+            const href = link.getAttribute("href") || "";
+            switch (item.getAttribute("data-console-context-action")) {
+              case "open":
+                window.location.href = href;
+                break;
+              case "pane": {
+                const url = new URL(window.location.href);
+                const open = (url.searchParams.get("thread") || "").split(",").filter(Boolean);
+                if (!open.includes(key)) open.push(key);
+                url.searchParams.set("thread", open.join(","));
+                window.location.href = url.toString();
+                break;
+              }
+              case "slack": {
+                // slack:CHANNEL:TS (optionally slack:TEAM:CHANNEL:TS)
+                const parts = key.split(":");
+                const ts = parts[parts.length - 1];
+                const channel = parts[parts.length - 2];
+                if (channel && ts) {
+                  window.open(`https://slack.com/app_redirect?channel=${channel}&message_ts=${ts}`, "_blank", "noopener");
+                }
+                break;
+              }
+              case "copy":
+                navigator.clipboard?.writeText(new URL(href, window.location.origin).toString());
+                break;
+              case "archive": {
+                const archived = archivedThreads();
+                if (archived.has(key)) {
+                  archived.delete(key);
+                } else {
+                  archived.add(key);
+                }
+                persistArchived(archived);
+                window.__consoleSyncArchivedThreads?.();
+                break;
+              }
+            }
+            closeMenu();
+          });
+          document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeMenu();
+          });
+          document.addEventListener("scroll", closeMenu, true);
+          document.addEventListener("turbo:load", () => window.__consoleSyncArchivedThreads?.());
+          document.addEventListener("turbo:frame-load", () => window.__consoleSyncArchivedThreads?.());
+        }
+        syncArchivedThreads();
+
         // Channel disclosures in the thread sidebar. Collapsed channels are
         // remembered so the sidebar looks the same across visits.
         const CHANNEL_COLLAPSE_KEY = "console:collapsed-channels";
