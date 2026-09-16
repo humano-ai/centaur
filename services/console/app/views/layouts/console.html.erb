@@ -326,6 +326,12 @@
         line-height: 1;
       }
 
+      .console-thread-separator {
+        height: 1px;
+        margin: 0.625rem 0.5rem 0.25rem;
+        background: var(--border-seam);
+      }
+
       .console-thread-group-label {
         padding: 0.5rem 0.5rem 0.125rem;
         color: var(--subtle-foreground);
@@ -1619,12 +1625,10 @@
             </div>
 
             <div class="console-thread-group">
-              <a href="<%= console_threads_path %>"
-                 class="console-thread-group-title <%= "console-thread-group-title-active" if threads_view %>"
-                 title="Chats">
-                <span class="console-nav-icon"><%= console_icon("message-square", classes: "size-4") %></span>
-                <span class="console-nav-label">Chats</span>
-              </a>
+              <%# bb separates the thread list from the nav with a hairline
+                  rather than a "Chats" tab: the channel group labels below
+                  already say what the list is. %>
+              <div class="console-thread-separator" role="separator"></div>
               <%# The thread list is loaded lazily via a Turbo Frame so the
                   unindexed cross-database sessions query never blocks the primary
                   page render. See ApplicationController#init_console_sidebar_threads
