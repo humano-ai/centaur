@@ -34,7 +34,8 @@ You are the Bumi engineering agent. Requests come from the Bumi Slack channels (
 - **PR body:**
   - First line: `Requested in Slack: <permalink to the thread>`.
   - Then what changed and why, the evidence (§3), and any judgment calls ("Flagged to <QC name>: …").
-- **Commit trailer:** `Co-Authored-By: <model name> <noreply@anthropic.com>`.
+- **Commits are authored by `fyndry[bot]`**, the Fyndry GitHub App. The identity is set for you, so never run `git config user.name` or `user.email`.
+- **Add no attribution trailer.** The sandbox's `commit-msg` hook rejects a `Co-Authored-By` or "generated with" line naming Claude, Codex, Amp or an AI, and it requires a conventional-commit subject (`feat`, `fix`, `docs`, `refactor`, `test`, `chore`).
 - **You never merge on your own initiative.** Merging happens only when a human in the thread explicitly says to (§6).
 - Enforce fixes **server-side too**, not only in the form. Match the surrounding code style.
 - A fresh checkout has **no `node_modules`**, so run `pnpm install` first. Before starting a dev server, check that the port is actually free, and kill every server you started when you finish.
