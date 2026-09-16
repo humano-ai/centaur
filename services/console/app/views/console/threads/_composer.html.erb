@@ -21,16 +21,19 @@
       redirect, and a new-chat pane swaps its "new" sentinel for the created
       thread key. %>
   <%= form.hidden_field :open_threads, value: params[:thread].to_s.presence %>
+  <%# bb's composer: one bordered box holding the editor, with a borderless
+      action row underneath — model picker on the left, send on the right — and
+      a keyboard hint that steps aside once the box has focus. %>
   <div class="console-composer-box">
     <%= form.text_area :prompt,
                        rows: thread_mode || compact_mode ? 1 : 3,
-                       placeholder: thread_mode ? "Follow up" : "Do anything",
+                       placeholder: thread_mode ? "Ask for a follow-up" : "Ask anything",
                        required: true,
                        autofocus: !thread_mode,
                        class: "console-composer-input",
                        data: { console_composer_input: true } %>
+    <span class="console-composer-hint" aria-hidden="true">↵</span>
     <div class="console-composer-controls">
-      <span class="console-composer-spacer"></span>
       <% unless thread_mode %>
         <% default_value = composer_default_agent_value %>
         <% default_agent = composer_agents.find { |agent| agent.value == default_value } %>
@@ -86,8 +89,9 @@
           </div>
         </div>
       <% end %>
-      <button type="submit" class="console-composer-send" aria-label="Send message" title="Send">
-        <%= console_icon("arrow-up", classes: "size-4") %>
+      <span class="console-composer-spacer"></span>
+      <button type="submit" class="console-composer-send" aria-label="Send message" title="Submit (Enter)">
+        <%= console_icon("corner-down-left", classes: "size-4") %>
       </button>
     </div>
   </div>
