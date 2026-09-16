@@ -23,7 +23,19 @@
                 data-console-channel-toggle
                 title="<%= group_label %>">
           <span class="console-channel-caret" aria-hidden="true"><%= console_icon("chevron-down", classes: "size-3") %></span>
-          <span class="console-channel-hash" aria-hidden="true"><%= console_icon("hash", classes: "size-3.5") %></span>
+          <% if console_sidebar_group_dm?(group_threads.first) %>
+            <% avatar = console_sidebar_group_avatar_url(group_threads.first) %>
+            <% if avatar && avatar["src"] %>
+              <%= image_tag avatar["src"],
+                            srcset: (avatar["srcset"] ? { avatar["srcset"] => "2x" } : nil),
+                            class: "console-channel-avatar-img",
+                            alt: "", aria: { hidden: true }, loading: "lazy" %>
+            <% else %>
+              <span class="console-channel-avatar" aria-hidden="true"><%= console_sidebar_group_initials(group_label) %></span>
+            <% end %>
+          <% else %>
+            <span class="console-channel-hash" aria-hidden="true"><%= console_icon("hash", classes: "size-3.5") %></span>
+          <% end %>
           <span class="console-channel-name"><%= group_label %></span>
           <span class="console-channel-count"><%= group_threads.size %></span>
         </button>

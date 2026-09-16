@@ -371,6 +371,45 @@ module ApplicationHelper
     end
   end
 
+  # DM threads are grouped under the person, channels under the channel. Slack
+  # draws an avatar for the former and a hash for the latter; the sidebar does
+  # the same, falling back to initials because the Console has no Slack token
+  # to resolve profile photos with.
+  def console_sidebar_group_dm?(session)
+    session.thread_key.to_s.start_with?("slack:D") ||
+      session.metadata_hash["slack_user_id"].present? &&
+        session.metadata_hash["slack_conversation_name"].to_s ==
+          session.metadata_hash["slack_display_name"].to_s
+  end
+
+  # Slack profile photo for a DM group, cached for a day. Any failure (no
+  # token, rate limit, network) falls back to initials, so the sidebar never
+  # waits on Slack twice for the same person.
+  def console_sidebar_group_avatar_url(session)
+    user_id = session.metadata_hash["slack_user_id"].presence
+    token = ENV["SLACK_BOT_TOKEN"].presence
+    return nil unless user_id && token
+
+    Rails.cache.fetch("slack-avatar/#{user_id}", expires_in: 1.day) do
+      uri = URI("https://slack.com/api/users.info?user=#{user_id}")
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 2, read_timeout: 3) do |http|
+        http.get(uri.request_uri, "Authorization" => "Bearer #{token}")
+      end
+      body = JSON.parse(response.body)
+      profile = body.dig("user", "profile") || {}
+      # 24px for the 16px slot, 32px for 2x — the pair Slack itself serves.
+      { "src" => profile["image_24"].presence || profile["image_48"].presence,
+        "srcset" => profile["image_32"].presence || profile["image_48"].presence }
+        .compact.presence&.slice("src", "srcset")
+    end
+  rescue StandardError
+    nil
+  end
+
+  def console_sidebar_group_initials(label)
+    label.to_s.split(/[\s._-]+/).reject(&:blank?).first(2).map { |part| part[0].to_s.upcase }.join
+  end
+
   def console_sidebar_thread_title(session, latest_message = nil)
     # sessions.title is the title api-rs generates on message append; prefer it
     # over metadata heuristics. Guarded because snapshots mirrored before the
