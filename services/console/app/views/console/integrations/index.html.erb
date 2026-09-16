@@ -1,8 +1,8 @@
-<% content_for :title, "Integrations · Centaur Console" %>
+<% content_for :title, "Integrations · Foundry Console" %>
 
 <%= render "console/page_header",
            title: "Integrations",
-           subtitle: "Connect your accounts so Centaur can act on your behalf." %>
+           subtitle: "Connect your accounts so Foundry can act on your behalf." %>
 
 <% if @oauth_apps.empty? %>
   <p class="empty-state">No integrations available yet.</p>
@@ -43,5 +43,5 @@
       </div>
     <% end %>
   </div>
-  <p class="mt-6 text-xs text-zinc-600">Connecting opens the provider's consent screen. Once you approve, Centaur stores and refreshes the credential automatically.</p>
+  <p class="mt-6 text-xs text-zinc-600">Connecting opens the provider's consent screen. Once you approve, Foundry stores and refreshes the credential automatically.</p>
 <% end %>

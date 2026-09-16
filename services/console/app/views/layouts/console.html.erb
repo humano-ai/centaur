@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
   <head>
-    <title><%= content_for(:title) || "Centaur Console" %></title>
+    <title><%= content_for(:title) || "Foundry Console" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
@@ -1842,12 +1842,12 @@
     <div id="console-shell" class="console-shell">
       <aside class="console-sidebar" aria-label="Console navigation">
         <div class="console-sidebar-top">
-          <a href="<%= root_path %>" class="console-brand" aria-label="Centaur Console">
+          <a href="<%= root_path %>" class="console-brand" aria-label="Foundry Console">
             <span class="console-brand-glyph">
               <%= image_tag "/icon.svg", alt: "", aria: { hidden: true }, width: 275, height: 275 %>
             </span>
             <span class="console-brand-lockup">
-              <%= image_tag "centaur-lockup-white.svg", alt: "Centaur", class: "glow", width: 497, height: 127 %>
+              <%= image_tag "foundry-lockup-white.svg", alt: "Foundry", class: "glow", width: 497, height: 127 %>
             </span>
           </a>
         </div>
@@ -1964,7 +1964,7 @@
                  aria-labelledby="console-account-menu-button"
                  hidden>
               <div class="console-account-menu-line" title="<%= current_user.email %>"><%= current_user.email %></div>
-              <div class="console-account-menu-line console-account-menu-muted">Centaur Console</div>
+              <div class="console-account-menu-line console-account-menu-muted">Foundry Console</div>
               <div class="console-account-menu-separator"></div>
               <%# PWA install entry point. Hidden unless the browser reports
                   the console is installable (beforeinstallprompt); installing
@@ -1977,7 +1977,7 @@
                       data-action="pwa-install#install"
                       hidden
                       role="menuitem"
-                      title="Install Centaur Console as a standalone app"
+                      title="Install Foundry Console as a standalone app"
                       aria-label="Install app">
                 <%= console_icon("computer", classes: "size-4") %>
                 <span>Install app</span>
@@ -2030,8 +2030,8 @@
                   data-console-nav-toggle>
             <%= console_icon("menu", classes: "size-5") %>
           </button>
-          <a href="<%= root_path %>" class="console-mobile-brand" aria-label="Centaur Console">
-            <%= image_tag "centaur-lockup-white.svg", alt: "Centaur", class: "glow", width: 497, height: 127 %>
+          <a href="<%= root_path %>" class="console-mobile-brand" aria-label="Foundry Console">
+            <%= image_tag "foundry-lockup-white.svg", alt: "Foundry", class: "glow", width: 497, height: 127 %>
           </a>
         </div>
         <div class="<%= threads_view ? "console-main-thread-frame" : "console-main-page" %>">
