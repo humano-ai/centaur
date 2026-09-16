@@ -98,7 +98,6 @@
     <style>
       ::selection { background: var(--primary); color: var(--background); }
       html[data-console-theme="dark"] { color-scheme: dark; }
-      html[data-console-theme="light"] { color-scheme: light; }
       .glow { filter: drop-shadow(0 0 14px rgba(244, 244, 245,0.45)); }
       *::-webkit-scrollbar { width: 10px; height: 10px; }
       *::-webkit-scrollbar-track { background: var(--background); }
@@ -1196,36 +1195,11 @@
         color: var(--ring);
       }
 
-      html[data-console-theme="light"] ::selection {
-        background: rgba(244, 244, 245, 0.22);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] *::-webkit-scrollbar-track {
-        background: var(--foreground);
-      }
 
-      html[data-console-theme="light"] *::-webkit-scrollbar-thumb {
-        background: var(--primary);
-      }
 
-      html[data-console-theme="light"] *::-webkit-scrollbar-thumb:hover {
-        background: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] body,
-      html[data-console-theme="light"] .console-shell,
-      html[data-console-theme="light"] .console-main,
-      html[data-console-theme="light"] .console-main-page,
-      html[data-console-theme="light"] .console-main-thread-frame {
-        background: var(--foreground);
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-sidebar {
-        border-right-color: var(--primary);
-        background: var(--foreground);
-      }
 
       /* Amber notice boxes (thread-DB unavailable, managed secret) keep their
          translucent amber-on-dark look in dark mode, but that washes out on the
@@ -1237,455 +1211,105 @@
         font-weight: 600;
       }
 
-      html[data-console-theme="light"] .console-sidebar-account {
-        border-top-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-brand {
-        color: var(--border);
-      }
 
       html[data-console-theme="light"] .console-brand-lockup img,
       html[data-console-theme="light"] .console-brand-glyph img {
         filter: invert(1) drop-shadow(0 0 14px rgba(244, 244, 245, 0.14));
       }
 
-      html[data-console-theme="light"] .console-nav-link,
-      html[data-console-theme="light"] .console-thread-group-title,
-      html[data-console-theme="light"] .console-account-menu-button,
-      html[data-console-theme="light"] .console-signout-button {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-nav-link:hover,
-      html[data-console-theme="light"] .console-thread-group-title:hover,
-      html[data-console-theme="light"] .console-thread-link:hover,
-      html[data-console-theme="light"] .console-account-button:hover,
-      html[data-console-theme="light"] .console-account-button[aria-expanded="true"],
-      html[data-console-theme="light"] .console-account-menu-button:hover,
-      html[data-console-theme="light"] .console-signout-button:hover {
-        background: var(--foreground);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-nav-link-active,
-      html[data-console-theme="light"] .console-thread-group-title-active,
-      html[data-console-theme="light"] .console-thread-link-active {
-        background: var(--primary);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thread-link {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-thread-link-open {
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-thread-link-open::before {
-        background: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thread-link-open[data-console-pane-index]::before {
-        background: none;
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thread-time,
-      html[data-console-theme="light"] .console-thread-empty,
-      html[data-console-theme="light"] .console-thread-show-all,
-      html[data-console-theme="light"] .console-account-email,
-      html[data-console-theme="light"] .console-page-meta {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thread-show-all:hover {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-panel-close {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-panel-close:hover {
-        background: var(--primary);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-thread-share-trigger {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thread-share-trigger:hover {
-        background: var(--primary);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog {
-        border-color: var(--primary);
-        background: var(--foreground);
-        color: var(--ring);
-        box-shadow: 0 24px 70px rgba(39, 39, 42, 0.2);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog::backdrop {
-        background: rgba(39, 39, 42, 0.38);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog-copy h2 {
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog-copy > p:not(.console-share-dialog-error) {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog-actions {
-        border-top-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-share-dialog-error {
-        color: #b42318;
-      }
 
-      html[data-console-theme="light"] .console-thinking-summary {
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-thinking-summary:hover,
-      html[data-console-theme="light"] .console-thinking-command-row:hover {
-        background: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-thinking-summary:hover {
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-thinking-preview {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thinking-title {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-thinking-failed,
-      html[data-console-theme="light"] .console-command-status {
-        color: #cf3f3f;
-      }
 
-      html[data-console-theme="light"] .console-command-prompt {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-command-prompt--failed {
-        color: #cf3f3f;
-      }
 
-      html[data-console-theme="light"] .console-markdown table th {
-        border-bottom-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-markdown table td {
-        border-bottom-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-thinking-body {
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-row {
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-row:hover {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-chevron {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-output {
-        border-color: var(--primary);
-        background: var(--foreground);
-        color: var(--ring);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-full {
-        border-bottom-color: var(--primary);
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-result {
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-thinking-command-empty {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-user-avatar {
-        background: var(--foreground);
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-account-menu {
-        border-color: var(--primary);
-        background: var(--foreground);
-        box-shadow: 0 18px 45px rgba(39, 39, 42, 0.12);
-      }
 
-      html[data-console-theme="light"] .console-account-menu-line {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-account-menu-muted {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-account-menu-separator {
-        background: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-control-tabs {
-        border-bottom-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-thread-detail-header {
-        border-bottom-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-control-tab {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-control-tab:hover {
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-control-tab-active {
-        border-color: var(--muted-foreground);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-run-row {
-        background: var(--foreground);
-        color: var(--muted-foreground);
-        box-shadow: inset 0 0 0 1px var(--primary);
-      }
 
-      html[data-console-theme="light"] .console-run-status {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .console-run-id {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .form-section,
-      html[data-console-theme="light"] .console-panel,
-      html[data-console-theme="light"] .console-scroll-panel {
-        border-color: var(--primary);
-        background: var(--foreground);
-      }
 
-      html[data-console-theme="light"] .console-table-head {
-        background: var(--foreground);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-table > thead {
-        border-block-end-color: var(--primary);
-        border-bottom-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .role-pill {
-        background: var(--foreground);
-        color: #0369a1;
-        --tw-ring-color: rgb(14 165 233 / 0.3);
-      }
 
-      html[data-console-theme="light"] .form-input {
-        border-color: var(--primary);
-        background: var(--foreground);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .form-input::placeholder,
-      html[data-console-theme="light"] .placeholder-zinc-500::placeholder,
-      html[data-console-theme="light"] .placeholder-zinc-600::placeholder {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .btn-secondary {
-        border-color: var(--primary);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .page-title {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .page-subtitle {
-        color: var(--muted-foreground);
-      }
 
       /* Toggle chips (filter tabs, HTTP methods): the component's @apply'd
          ink colors compile to raw values, so the utility-class remaps above
          don't reach them -- restyle the component classes directly. */
-      html[data-console-theme="light"] .chip {
-        border-color: var(--primary);
-        background: var(--foreground);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .chip:hover {
-        border-color: #a1a1aa80;
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .chip-on,
-      html[data-console-theme="light"] .chip-on:hover {
-        border-color: var(--muted-foreground);
-        background: rgba(212, 212, 216, 0.08);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .empty-state {
-        border-color: var(--primary);
-        background: var(--foreground);
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-link,
-      html[data-console-theme="light"] .text-centaur-300,
-      html[data-console-theme="light"] .text-centaur-400,
-      html[data-console-theme="light"] .text-centaur-500 {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .bg-ink-950,
-      html[data-console-theme="light"] .bg-ink-950\/15,
-      html[data-console-theme="light"] .bg-ink-950\/35,
-      html[data-console-theme="light"] .bg-ink-950\/80,
-      html[data-console-theme="light"] .bg-ink-900,
-      html[data-console-theme="light"] .bg-ink-900\/25,
-      html[data-console-theme="light"] .bg-ink-900\/35,
-      html[data-console-theme="light"] .bg-ink-900\/80 {
-        background-color: var(--foreground);
-      }
 
-      html[data-console-theme="light"] .bg-ink-850,
-      html[data-console-theme="light"] .bg-ink-850\/40,
-      html[data-console-theme="light"] .bg-ink-850\/50,
-      html[data-console-theme="light"] .bg-ink-850\/60,
-      html[data-console-theme="light"] .bg-ink-850\/70,
-      html[data-console-theme="light"] .bg-ink-850\/80,
-      html[data-console-theme="light"] .bg-ink-800,
-      html[data-console-theme="light"] .bg-ink-800\/60,
-      html[data-console-theme="light"] .bg-ink-800\/80,
-      html[data-console-theme="light"] .bg-ink-700,
-      html[data-console-theme="light"] .bg-ink-700\/60 {
-        background-color: var(--foreground);
-      }
 
-      html[data-console-theme="light"] .bg-ink-600 {
-        background-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .border-ink-500,
-      html[data-console-theme="light"] .border-ink-600,
-      html[data-console-theme="light"] .border-ink-600\/80,
-      html[data-console-theme="light"] .border-ink-700 {
-        border-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .ring-ink-500,
-      html[data-console-theme="light"] .ring-ink-600 {
-        --tw-ring-color: var(--primary);
-      }
 
       /* Tailwind v4 puts divide-y borders on `> :not(:last-child)` (border-bottom),
          not on the v3 `~` sibling selector — the first child carries a divider too,
          so the recolor must cover it or the first row's border stays ink-dark. */
-      html[data-console-theme="light"] .divide-ink-600 > :not(:last-child),
-      html[data-console-theme="light"] .divide-ink-700 > :not(:last-child) {
-        border-block-color: var(--primary);
-        border-color: var(--primary);
-      }
 
-      html[data-console-theme="light"] .text-zinc-50,
-      html[data-console-theme="light"] .text-zinc-100,
-      html[data-console-theme="light"] .text-zinc-200,
-      html[data-console-theme="light"] .text-zinc-300 {
-        color: var(--input);
-      }
 
-      html[data-console-theme="light"] .text-zinc-400 {
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .text-zinc-500 {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .text-zinc-600 {
-        color: var(--muted-foreground);
-      }
 
       /* Composer: plain-CSS component classes, so the utility-class remaps
          above never reach them — they need their own light overrides. */
-      html[data-console-theme="light"] .console-composer-box {
-        border-color: rgba(16, 16, 18, 0.14);
-        background: var(--foreground);
-      }
 
-      html[data-console-theme="light"] .console-composer-box:focus-within {
-        border-color: rgba(16, 16, 18, 0.3);
-      }
 
-      html[data-console-theme="light"] .console-composer-input {
-        color: var(--secondary);
-      }
 
-      html[data-console-theme="light"] .console-composer-input::placeholder {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-composer-model-trigger {
-        background: transparent;
-        color: var(--ring);
-      }
 
-      html[data-console-theme="light"] .console-composer-model-trigger:hover,
-      html[data-console-theme="light"] .console-composer-model-trigger[aria-expanded="true"] {
-        background: rgba(16, 16, 18, 0.1);
-        color: var(--secondary);
-      }
 
-      html[data-console-theme="light"] .console-composer-model-check {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-composer-menu-value,
-      html[data-console-theme="light"] .console-composer-menu-chevron {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-thinking-pending {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-composer-send {
-        color: var(--foreground);
-      }
 
-      html[data-console-theme="light"] .console-new-chat-title {
-        color: var(--secondary);
-      }
 
       /* The mobile top bar (hamburger + brand) and the drawer scrim are hidden
          on desktop; the media query below turns them on for narrow viewports. */
@@ -1745,23 +1369,9 @@
         transition: opacity 200ms ease;
       }
 
-      html[data-console-theme="light"] .console-mobile-bar {
-        border-bottom-color: var(--primary);
-        background: rgba(251, 251, 248, 0.92);
-      }
 
-      html[data-console-theme="light"] .console-mobile-nav-toggle {
-        color: var(--muted-foreground);
-      }
 
-      html[data-console-theme="light"] .console-mobile-nav-toggle:hover {
-        background: var(--foreground);
-        color: var(--border);
-      }
 
-      html[data-console-theme="light"] .console-mobile-brand {
-        color: var(--border);
-      }
 
       html[data-console-theme="light"] .console-mobile-brand img {
         filter: invert(1) drop-shadow(0 0 14px rgba(244, 244, 245, 0.14));
