@@ -7,12 +7,16 @@
   <% if @console_sidebar_threads.blank? %>
     <div class="console-thread-empty">No recent chats</div>
   <% else %>
-    <%# Grouped by channel (bb groups its sidebar the same way): groups keep the
-        recency order of their newest thread, and the 5-row collapse applies
-        across the whole list, not per group. %>
+    <%# Grouped by conversation, channels first and people after, the way Slack
+        splits its sidebar. Groups keep the recency order of their newest
+        thread within each half. %>
     <% grouped = @console_sidebar_threads.group_by { |thread| console_sidebar_thread_group(thread) } %>
+    <% channel_groups, dm_groups = grouped.partition { |_label, threads| !console_sidebar_group_dm?(threads.first) } %>
     <% index = -1 %>
-    <% grouped.each do |group_label, group_threads| %>
+    <% (channel_groups + dm_groups).each_with_index do |(group_label, group_threads), group_position| %>
+      <% if dm_groups.any? && group_position == channel_groups.size && channel_groups.any? %>
+        <div class="console-thread-separator" role="separator"></div>
+      <% end %>
       <%# Slack-style channel row that toggles its threads, like bb's
           project/folder disclosures. Collapsed state is remembered per channel
           in localStorage by the console layout's script. %>
