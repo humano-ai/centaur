@@ -31,9 +31,35 @@ class SlackClient:
             raise RuntimeError(f"slack {method} failed: {data.get('error')}")
         return data
 
+    def _get(self, method: str, **params) -> dict:
+        resp = self._http.get(f"/{method}", params={k: v for k, v in params.items() if v is not None})
+        resp.raise_for_status()
+        data = resp.json()
+        if not data.get("ok"):
+            raise RuntimeError(f"slack {method} failed: {data.get('error')}")
+        return data
+
     def post(self, channel: str, text: str, thread_ts: str | None = None) -> dict:
         """Post a message, optionally as a reply in a thread."""
         return self._call("chat.postMessage", channel=channel, text=text, thread_ts=thread_ts)
+
+    def thread(self, channel: str, thread_ts: str, limit: int = 200) -> list[dict]:
+        """Every message in a thread, oldest first — the task usually lives here."""
+        data = self._get("conversations.replies", channel=channel, ts=thread_ts, limit=limit)
+        return data.get("messages", [])
+
+    def history(self, channel: str, limit: int = 50) -> list[dict]:
+        """Recent top-level messages in a channel."""
+        return self._get("conversations.history", channel=channel, limit=limit).get("messages", [])
+
+    def user(self, user_id: str) -> dict:
+        """Display name and email for a Slack user id, to resolve <@U…> mentions."""
+        profile = self._get("users.info", user=user_id).get("user", {})
+        return {
+            "id": profile.get("id"),
+            "name": profile.get("profile", {}).get("real_name") or profile.get("name"),
+            "email": profile.get("profile", {}).get("email"),
+        }
 
     def upload(self, channel: str, path: str, title: str | None = None, thread_ts: str | None = None) -> dict:
         """Upload a file to a channel or thread via Slack's external-upload flow."""

@@ -38,3 +38,30 @@ def upload(
     from .client import _client
 
     print(json.dumps(_client().upload(channel, path, title, thread_ts), indent=2, default=str))
+
+
+@app.command("thread")
+def thread(channel: str, thread_ts: str, limit: int = 200):
+    """Read a whole Slack thread (oldest first): use it to recover the task."""
+    from .client import _client
+
+    messages = _client().thread(channel, thread_ts, limit)
+    for m in messages:
+        print(json.dumps({"ts": m.get("ts"), "user": m.get("user") or m.get("bot_id"), "text": m.get("text", "")}))
+
+
+@app.command("history")
+def history(channel: str, limit: int = 50):
+    """Read recent top-level messages in a channel."""
+    from .client import _client
+
+    for m in _client().history(channel, limit):
+        print(json.dumps({"ts": m.get("ts"), "user": m.get("user") or m.get("bot_id"), "text": m.get("text", "")}))
+
+
+@app.command("user")
+def user(user_id: str):
+    """Resolve a Slack user id to a name and email."""
+    from .client import _client
+
+    print(json.dumps(_client().user(user_id), indent=2))
