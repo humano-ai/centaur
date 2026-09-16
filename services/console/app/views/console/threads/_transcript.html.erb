@@ -58,15 +58,15 @@
   <% else %>
     <% user_message = item[:align] == :end %>
     <div class="group flex <%= user_message ? "justify-end" : "justify-start" %>">
-      <div class="console-message-stack flex flex-col <%= user_message ? "max-w-[72%] items-end" : "w-full max-w-3xl items-start" %>">
-        <div class="<%= user_message ? "w-full rounded-[24px] bg-ink-700 px-4 py-3 text-zinc-100" : "w-full text-zinc-300" %>">
-          <% unless user_message %>
-            <div class="mb-1 text-xs font-medium text-zinc-500"><%= item[:label] || item[:role] %></div>
-          <% end %>
+      <%# bb's split: the user's turn is a right-aligned bubble on a recessed
+          fill, the agent's is plain prose on the canvas — identity reads from
+          alignment, so neither carries a name row. %>
+      <div class="console-message-stack flex flex-col <%= user_message ? "max-w-[70%] items-end" : "w-full max-w-3xl items-start" %>">
+        <div class="<%= user_message ? "w-full rounded-xl border border-border-seam bg-surface-recessed px-4 py-2.5 text-foreground" : "w-full px-2 text-foreground" %>">
           <% if item[:text].present? %>
-            <div class="console-markdown text-sm leading-6"><%= console_markdown(item[:text]) %></div>
+            <div class="console-markdown text-sm leading-relaxed"><%= console_markdown(item[:text]) %></div>
           <% elsif item[:images].blank? %>
-            <div class="console-markdown text-sm leading-6"><%= console_markdown("No text content.") %></div>
+            <div class="console-markdown text-sm leading-relaxed"><%= console_markdown("No text content.") %></div>
           <% end %>
           <% if item[:images].present? %>
             <div class="console-message-images <%= "mt-3" if item[:text].present? %>">
