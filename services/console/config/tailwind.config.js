@@ -8,17 +8,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Upstream class names (centaur-*/ink-*) kept working, mapped onto the
-        // shadcn neutral scale. Semantic tokens (background, card, primary, …)
-        // come from the @theme block in app/assets/tailwind/application.css.
+        // Upstream class names map onto the shadcn tokens (not fixed hexes) so
+        // every surface follows the light/dark theme. Tailwind v4 renders
+        // /alpha modifiers with color-mix(), so `bg-ink-800/80` still works.
         centaur: {
-          50: '#ffffff', 100: '#fafafa', 200: '#f5f5f5', 300: '#e5e5e5',
-          400: '#d4d4d4', 500: '#a1a1a1', 600: '#737373', 700: '#525252',
-          800: '#404040', 900: '#262626'
+          50: 'var(--foreground)', 100: 'var(--foreground)', 200: 'var(--foreground)',
+          300: 'var(--foreground)', 400: 'var(--primary)', 500: 'var(--primary)',
+          600: 'var(--muted-foreground)', 700: 'var(--muted-foreground)',
+          800: 'var(--border)', 900: 'var(--border)'
         },
         ink: {
-          950: '#0a0a0a', 900: '#0a0a0a', 850: '#141414', 800: '#171717',
-          700: '#1f1f1f', 600: '#262626', 500: '#343434', 400: '#404040'
+          950: 'var(--background)', 900: 'var(--background)', 850: 'var(--card)',
+          800: 'var(--card)', 700: 'var(--muted)', 600: 'var(--border)',
+          500: 'var(--input)', 400: 'var(--ring)'
+        },
+        // The console writes body/secondary text as zinc; these are all light
+        // values meant for dark chrome, so they resolve to foreground/muted.
+        zinc: {
+          50: 'var(--foreground)', 100: 'var(--foreground)', 200: 'var(--foreground)',
+          300: 'var(--muted-foreground)', 400: 'var(--muted-foreground)',
+          500: 'var(--muted-foreground)', 600: 'var(--muted-foreground)',
+          700: 'var(--border)', 800: 'var(--card)', 900: 'var(--background)',
+          950: 'var(--background)'
         }
       },
       fontFamily: {
