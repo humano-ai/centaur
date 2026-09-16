@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-    <meta name="theme-color" content="#050506">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" href="/icon-dark.svg" type="image/svg+xml" data-console-favicon>
     <link rel="apple-touch-icon" href="/pwa-icon-192.png">
     <script>
@@ -93,23 +93,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-      ::selection { background: #e4e4e7; color: #050506; }
+      ::selection { background: var(--primary); color: var(--background); }
       html[data-console-theme="dark"] { color-scheme: dark; }
       html[data-console-theme="light"] { color-scheme: light; }
       .glow { filter: drop-shadow(0 0 14px rgba(244, 244, 245,0.45)); }
       *::-webkit-scrollbar { width: 10px; height: 10px; }
-      *::-webkit-scrollbar-track { background: #09090b; }
-      *::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 1px; }
-      *::-webkit-scrollbar-thumb:hover { background: #e4e4e7; }
+      *::-webkit-scrollbar-track { background: var(--background); }
+      *::-webkit-scrollbar-thumb { background: var(--input); border-radius: 1px; }
+      *::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
       .console-shell {
         display: flex;
         height: 100%;
         overflow: hidden;
-        background: #050506;
+        background: var(--background);
       }
 
       /* While descoped, the body becomes a column: banner on top, shell
@@ -160,7 +160,7 @@
         min-height: 0;
         flex-direction: column;
         border-right: 1px solid rgba(255, 255, 255, 0.07);
-        background: #050506;
+        background: var(--background);
         transition: width 160ms ease;
       }
 
@@ -177,7 +177,7 @@
         min-width: 0;
         flex: 1;
         align-items: center;
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-brand img {
@@ -220,19 +220,19 @@
         gap: 0.625rem;
         border-radius: 0.875rem;
         padding: 0 0.875rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         text-decoration: none;
         transition: background 120ms ease, color 120ms ease;
       }
 
       .console-nav-link:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-nav-link-active {
         background: rgba(255, 255, 255, 0.07);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-nav-icon {
@@ -265,7 +265,7 @@
         gap: 0.625rem;
         border-radius: 0.875rem;
         padding: 0 0.875rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.875rem;
         font-weight: 500;
         text-decoration: none;
@@ -274,12 +274,12 @@
 
       .console-thread-group-title:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-group-title-active {
         background: rgba(255, 255, 255, 0.07);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-list {
@@ -297,7 +297,7 @@
         gap: 0.5rem;
         border-radius: 0.875rem;
         padding: 0.55rem 0.75rem 0.55rem 2.5rem;
-        color: #d4d4d8;
+        color: var(--primary);
         text-decoration: none;
         transition: background 120ms ease, color 120ms ease;
       }
@@ -307,7 +307,7 @@
          second pane opens, rows carry data-console-pane-index and the marker
          becomes the pane number in grid order. */
       .console-thread-link-open {
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-link-open::before {
@@ -319,7 +319,7 @@
         width: 0.3rem;
         transform: translateY(-50%);
         border-radius: 999px;
-        background: #e4e4e7;
+        background: var(--primary);
       }
 
       .console-thread-link-open[data-console-pane-index]::before {
@@ -329,7 +329,7 @@
         width: auto;
         border-radius: 0;
         background: none;
-        color: #f4f4f5;
+        color: var(--foreground);
         font-size: 0.6875rem;
         font-weight: 700;
         line-height: 1;
@@ -337,12 +337,12 @@
 
       .console-thread-link:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-link-active {
         background: rgba(255, 255, 255, 0.07);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-link-hidden {
@@ -359,7 +359,7 @@
       }
 
       .console-thread-time {
-        color: #71717a;
+        color: var(--muted-foreground);
         font-size: 0.75rem;
       }
 
@@ -370,13 +370,13 @@
         flex: 0 0 auto;
         place-items: center;
         border-radius: 0.5rem;
-        color: #71717a;
+        color: var(--muted-foreground);
         transition: background 120ms ease, color 120ms ease;
       }
 
       .console-panel-close:hover {
         background: rgba(255, 255, 255, 0.08);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-thread-share-wrap {
@@ -391,13 +391,13 @@
         cursor: pointer;
         place-items: center;
         border-radius: 0.5rem;
-        color: #71717a;
+        color: var(--muted-foreground);
         transition: background 120ms ease, color 120ms ease;
       }
 
       .console-thread-share-trigger:hover {
         background: rgba(255, 255, 255, 0.08);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-share-dialog {
@@ -405,8 +405,8 @@
         margin: auto;
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 0.875rem;
-        background: #101012;
-        color: #d4d4d8;
+        background: var(--card);
+        color: var(--primary);
         padding: 0;
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.58);
       }
@@ -421,14 +421,14 @@
       }
 
       .console-share-dialog-copy h2 {
-        color: #f4f4f5;
+        color: var(--foreground);
         font-size: 1rem;
         font-weight: 600;
       }
 
       .console-share-dialog-copy > p:not(.console-share-dialog-error) {
         margin-top: 0.75rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.875rem;
         line-height: 1.5;
       }
@@ -473,7 +473,7 @@
         cursor: pointer;
         list-style: none;
         user-select: none;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.8125rem;
         line-height: 1.35;
         border-radius: 0.5rem;
@@ -498,7 +498,7 @@
 
       .console-thinking-summary:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #c4c4c8;
+        color: var(--primary);
       }
 
       .console-thinking-chevron {
@@ -523,12 +523,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       .console-thinking-title {
         flex: 0 0 auto;
-        color: #d4d4d8;
+        color: var(--primary);
         font-weight: 500;
         white-space: nowrap;
       }
@@ -548,7 +548,7 @@
 
       .console-thinking-failed::before {
         content: ",";
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         margin-right: 0.35rem;
       }
 
@@ -558,7 +558,7 @@
 
       .console-thinking-body {
         margin-top: 0.35rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       /* Roomy enough that adjacent rows' hover pills (which extend 0.2rem
@@ -580,7 +580,7 @@
         gap: 0.45rem;
         cursor: pointer;
         list-style: none;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         font-size: 0.8125rem;
         line-height: 1.45;
@@ -597,12 +597,12 @@
 
       .console-thinking-command-row:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #d4d4d8;
+        color: var(--primary);
       }
 
       .console-command-prompt {
         flex: 0 0 auto;
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       .console-command-prompt--failed {
@@ -626,7 +626,7 @@
         flex: 0 0 auto;
         margin-left: auto;
         place-items: center;
-        color: #71717a;
+        color: var(--muted-foreground);
         /* Optical centering onto the lowercase x-band (baseline alignment
            floats the icon ~2px high). */
         position: relative;
@@ -648,7 +648,7 @@
         border: 1px solid rgba(255, 255, 255, 0.06);
         border-radius: 0.5rem;
         background: rgba(255, 255, 255, 0.045);
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       .console-thinking-command-full {
@@ -666,16 +666,16 @@
       }
 
       .console-thinking-command-full {
-        color: #d4d4d8;
+        color: var(--primary);
       }
 
       .console-thinking-command-result {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       .console-thinking-command-empty {
         padding: 0.6rem calc(0.5rem - 1px);
-        color: #71717a;
+        color: var(--muted-foreground);
         font-size: 0.75rem;
       }
 
@@ -685,14 +685,14 @@
         width: 100%;
         cursor: pointer;
         padding: 0.45rem 0.75rem 0.45rem 2.5rem;
-        color: #71717a;
+        color: var(--muted-foreground);
         font-size: 0.8125rem;
         text-decoration: none;
         text-align: left;
       }
 
       .console-thread-show-all:hover {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       .console-thread-show-all[hidden] {
@@ -730,7 +730,7 @@
         place-items: center;
         border-radius: 999px;
         background: rgba(244, 244, 245, 0.16);
-        color: #f4f4f5;
+        color: var(--foreground);
         font-size: 0.75rem;
         font-weight: 700;
       }
@@ -740,7 +740,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #71717a;
+        color: var(--muted-foreground);
         font-size: 0.75rem;
       }
 
@@ -753,7 +753,7 @@
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.11);
         border-radius: 0.875rem;
-        background: #101012;
+        background: var(--card);
         padding: 0.5rem;
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
       }
@@ -767,12 +767,12 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         padding: 0.5rem 0.625rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.75rem;
       }
 
       .console-account-menu-muted {
-        color: #52525b;
+        color: var(--ring);
       }
 
       .console-account-menu-separator {
@@ -796,7 +796,7 @@
         gap: 0.5rem;
         border-radius: 0.625rem;
         padding: 0 0.625rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font: inherit;
         font-size: 0.875rem;
         font-weight: 500;
@@ -807,7 +807,7 @@
       .console-account-menu-button:hover,
       .console-signout-button:hover {
         background: rgba(255, 255, 255, 0.055);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       /* The install item is hidden until beforeinstallprompt fires; the
@@ -928,7 +928,7 @@
       .console-message-timestamp {
         min-height: 1.25rem;
         padding-top: 0.375rem;
-        color: #71717a;
+        color: var(--muted-foreground);
         font-size: 0.75rem;
         line-height: 0.875rem;
         opacity: 0;
@@ -973,14 +973,14 @@
         resize: none;
         border: 0;
         background: transparent;
-        color: #f4f4f5;
+        color: var(--foreground);
         font-size: 0.875rem;
         line-height: 1.5;
         outline: none;
       }
 
       .console-composer-input::placeholder {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       .console-composer-controls {
@@ -1009,7 +1009,7 @@
         border-radius: 999px;
         background: transparent;
         padding: 0.3rem 0.75rem;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.8125rem;
         font-weight: 500;
         transition: background 120ms ease, color 120ms ease;
@@ -1018,7 +1018,7 @@
       .console-composer-model-trigger:hover,
       .console-composer-model-trigger[aria-expanded="true"] {
         background: rgba(255, 255, 255, 0.09);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-composer-model-chevron {
@@ -1059,7 +1059,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #71717a;
+        color: var(--muted-foreground);
         font-weight: 400;
       }
 
@@ -1067,7 +1067,7 @@
         display: grid;
         flex: 0 0 auto;
         place-items: center;
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       .console-composer-model-option-label {
@@ -1082,13 +1082,13 @@
       .console-composer-model-check {
         display: grid;
         place-items: center;
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       /* "Thinking…" placeholder while a turn is executing, painted both by
          the server (_thinking_indicator) and the composer's optimistic JS. */
       .console-thinking-pending {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.875rem;
         line-height: 1.5;
         animation: console-thinking-pulse 1.6s ease-in-out infinite;
@@ -1106,13 +1106,13 @@
         flex: 0 0 auto;
         place-items: center;
         border-radius: 999px;
-        background: #e4e4e7;
-        color: #09090b;
+        background: var(--primary);
+        color: var(--background);
         transition: background 120ms ease;
       }
 
       .console-composer-send:hover {
-        background: #f4f4f5;
+        background: var(--foreground);
       }
 
       /* Full-page New-chat composer. Its resting state sits a bit above
@@ -1138,7 +1138,7 @@
       }
 
       .console-new-chat-title {
-        color: #f4f4f5;
+        color: var(--foreground);
         font-size: 1.25rem;
         font-weight: 600;
         text-align: center;
@@ -1165,7 +1165,7 @@
         flex: 0 0 auto;
         padding: 0.625rem 0.75rem;
         border-bottom: 1px solid transparent;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
         font-size: 0.875rem;
         font-weight: 500;
         white-space: nowrap;
@@ -1174,43 +1174,43 @@
       }
 
       .console-control-tab:hover {
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-control-tab-active {
-        border-color: #e4e4e7;
-        color: #f4f4f5;
+        border-color: var(--primary);
+        color: var(--foreground);
       }
 
       .console-run-row {
         background: rgba(9, 9, 11, 0.45);
-        color: #71717a;
+        color: var(--muted-foreground);
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
       }
 
       .console-run-status {
-        color: #d4d4d8;
+        color: var(--primary);
       }
 
       .console-run-id {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] ::selection {
         background: rgba(244, 244, 245, 0.22);
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-track {
-        background: #f4f4f5;
+        background: var(--foreground);
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-thumb {
-        background: #c4c4c8;
+        background: var(--primary);
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-thumb:hover {
-        background: #71717a;
+        background: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] body,
@@ -1218,13 +1218,13 @@
       html[data-console-theme="light"] .console-main,
       html[data-console-theme="light"] .console-main-page,
       html[data-console-theme="light"] .console-main-thread-frame {
-        background: #f4f4f5;
-        color: #3f3f46;
+        background: var(--foreground);
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-sidebar {
-        border-right-color: #e4e4e7;
-        background: #fafafa;
+        border-right-color: var(--primary);
+        background: var(--foreground);
       }
 
       /* Amber notice boxes (thread-DB unavailable, managed secret) keep their
@@ -1238,11 +1238,11 @@
       }
 
       html[data-console-theme="light"] .console-sidebar-account {
-        border-top-color: #e4e4e7;
+        border-top-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-brand {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-brand-lockup img,
@@ -1254,7 +1254,7 @@
       html[data-console-theme="light"] .console-thread-group-title,
       html[data-console-theme="light"] .console-account-menu-button,
       html[data-console-theme="light"] .console-signout-button {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-nav-link:hover,
@@ -1264,32 +1264,32 @@
       html[data-console-theme="light"] .console-account-button[aria-expanded="true"],
       html[data-console-theme="light"] .console-account-menu-button:hover,
       html[data-console-theme="light"] .console-signout-button:hover {
-        background: #f4f4f5;
-        color: #27272a;
+        background: var(--foreground);
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-nav-link-active,
       html[data-console-theme="light"] .console-thread-group-title-active,
       html[data-console-theme="light"] .console-thread-link-active {
-        background: #e4e4e7;
-        color: #a1a1aa;
+        background: var(--primary);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thread-link {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-thread-link-open {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-thread-link-open::before {
-        background: #71717a;
+        background: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thread-link-open[data-console-pane-index]::before {
         background: none;
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thread-time,
@@ -1297,35 +1297,35 @@
       html[data-console-theme="light"] .console-thread-show-all,
       html[data-console-theme="light"] .console-account-email,
       html[data-console-theme="light"] .console-page-meta {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thread-show-all:hover {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-panel-close {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-panel-close:hover {
-        background: #e4e4e7;
-        color: #27272a;
+        background: var(--primary);
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-thread-share-trigger {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thread-share-trigger:hover {
-        background: #e4e4e7;
-        color: #27272a;
+        background: var(--primary);
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-share-dialog {
-        border-color: #d4d4d8;
-        background: #ffffff;
-        color: #52525b;
+        border-color: var(--primary);
+        background: var(--foreground);
+        color: var(--ring);
         box-shadow: 0 24px 70px rgba(39, 39, 42, 0.2);
       }
 
@@ -1334,15 +1334,15 @@
       }
 
       html[data-console-theme="light"] .console-share-dialog-copy h2 {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-share-dialog-copy > p:not(.console-share-dialog-error) {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-share-dialog-actions {
-        border-top-color: #e4e4e7;
+        border-top-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-share-dialog-error {
@@ -1350,24 +1350,24 @@
       }
 
       html[data-console-theme="light"] .console-thinking-summary {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-thinking-summary:hover,
       html[data-console-theme="light"] .console-thinking-command-row:hover {
-        background: #e4e4e7;
+        background: var(--primary);
       }
 
       html[data-console-theme="light"] .console-thinking-summary:hover {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-thinking-preview {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thinking-title {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-thinking-failed,
@@ -1376,7 +1376,7 @@
       }
 
       html[data-console-theme="light"] .console-command-prompt {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-command-prompt--failed {
@@ -1384,187 +1384,187 @@
       }
 
       html[data-console-theme="light"] .console-markdown table th {
-        border-bottom-color: #d4d4d8;
+        border-bottom-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-markdown table td {
-        border-bottom-color: #e4e4e7;
+        border-bottom-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-thinking-body {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-thinking-command-row {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-thinking-command-row:hover {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-thinking-command-chevron {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thinking-command-output {
-        border-color: #e4e4e7;
-        background: #ffffff;
-        color: #52525b;
+        border-color: var(--primary);
+        background: var(--foreground);
+        color: var(--ring);
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
       }
 
       html[data-console-theme="light"] .console-thinking-command-full {
-        border-bottom-color: #e4e4e7;
-        color: #3f3f46;
+        border-bottom-color: var(--primary);
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-thinking-command-result {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-thinking-command-empty {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-user-avatar {
-        background: #f4f4f5;
-        color: #52525b;
+        background: var(--foreground);
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-account-menu {
-        border-color: #d4d4d8;
-        background: #ffffff;
+        border-color: var(--primary);
+        background: var(--foreground);
         box-shadow: 0 18px 45px rgba(39, 39, 42, 0.12);
       }
 
       html[data-console-theme="light"] .console-account-menu-line {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-account-menu-muted {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-account-menu-separator {
-        background: #e4e4e7;
+        background: var(--primary);
       }
 
       html[data-console-theme="light"] .console-control-tabs {
-        border-bottom-color: #e4e4e7;
+        border-bottom-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-thread-detail-header {
-        border-bottom-color: #e4e4e7;
+        border-bottom-color: var(--primary);
       }
 
       html[data-console-theme="light"] .console-control-tab {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-control-tab:hover {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-control-tab-active {
-        border-color: #71717a;
-        color: #a1a1aa;
+        border-color: var(--muted-foreground);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-run-row {
-        background: #ffffff;
-        color: #71717a;
-        box-shadow: inset 0 0 0 1px #e4e4e7;
+        background: var(--foreground);
+        color: var(--muted-foreground);
+        box-shadow: inset 0 0 0 1px var(--primary);
       }
 
       html[data-console-theme="light"] .console-run-status {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .console-run-id {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .form-section,
       html[data-console-theme="light"] .console-panel,
       html[data-console-theme="light"] .console-scroll-panel {
-        border-color: #e4e4e7;
-        background: #ffffff;
+        border-color: var(--primary);
+        background: var(--foreground);
       }
 
       html[data-console-theme="light"] .console-table-head {
-        background: #f4f4f5;
-        color: #71717a;
+        background: var(--foreground);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-table > thead {
-        border-block-end-color: #e4e4e7;
-        border-bottom-color: #e4e4e7;
+        border-block-end-color: var(--primary);
+        border-bottom-color: var(--primary);
       }
 
       html[data-console-theme="light"] .role-pill {
-        background: #f4f4f5;
+        background: var(--foreground);
         color: #0369a1;
         --tw-ring-color: rgb(14 165 233 / 0.3);
       }
 
       html[data-console-theme="light"] .form-input {
-        border-color: #d4d4d8;
-        background: #ffffff;
-        color: #27272a;
+        border-color: var(--primary);
+        background: var(--foreground);
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .form-input::placeholder,
       html[data-console-theme="light"] .placeholder-zinc-500::placeholder,
       html[data-console-theme="light"] .placeholder-zinc-600::placeholder {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .btn-secondary {
-        border-color: #d4d4d8;
-        color: #71717a;
+        border-color: var(--primary);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .page-title {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .page-subtitle {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       /* Toggle chips (filter tabs, HTTP methods): the component's @apply'd
          ink colors compile to raw values, so the utility-class remaps above
          don't reach them -- restyle the component classes directly. */
       html[data-console-theme="light"] .chip {
-        border-color: #d4d4d8;
-        background: #ffffff;
-        color: #71717a;
+        border-color: var(--primary);
+        background: var(--foreground);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .chip:hover {
         border-color: #a1a1aa80;
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .chip-on,
       html[data-console-theme="light"] .chip-on:hover {
-        border-color: #a1a1aa;
+        border-color: var(--muted-foreground);
         background: rgba(212, 212, 216, 0.08);
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .empty-state {
-        border-color: #d4d4d8;
-        background: #f4f4f5;
-        color: #a1a1aa;
+        border-color: var(--primary);
+        background: var(--foreground);
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-link,
       html[data-console-theme="light"] .text-centaur-300,
       html[data-console-theme="light"] .text-centaur-400,
       html[data-console-theme="light"] .text-centaur-500 {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .bg-ink-950,
@@ -1575,7 +1575,7 @@
       html[data-console-theme="light"] .bg-ink-900\/25,
       html[data-console-theme="light"] .bg-ink-900\/35,
       html[data-console-theme="light"] .bg-ink-900\/80 {
-        background-color: #f4f4f5;
+        background-color: var(--foreground);
       }
 
       html[data-console-theme="light"] .bg-ink-850,
@@ -1589,23 +1589,23 @@
       html[data-console-theme="light"] .bg-ink-800\/80,
       html[data-console-theme="light"] .bg-ink-700,
       html[data-console-theme="light"] .bg-ink-700\/60 {
-        background-color: #ffffff;
+        background-color: var(--foreground);
       }
 
       html[data-console-theme="light"] .bg-ink-600 {
-        background-color: #e4e4e7;
+        background-color: var(--primary);
       }
 
       html[data-console-theme="light"] .border-ink-500,
       html[data-console-theme="light"] .border-ink-600,
       html[data-console-theme="light"] .border-ink-600\/80,
       html[data-console-theme="light"] .border-ink-700 {
-        border-color: #e4e4e7;
+        border-color: var(--primary);
       }
 
       html[data-console-theme="light"] .ring-ink-500,
       html[data-console-theme="light"] .ring-ink-600 {
-        --tw-ring-color: #d4d4d8;
+        --tw-ring-color: var(--primary);
       }
 
       /* Tailwind v4 puts divide-y borders on `> :not(:last-child)` (border-bottom),
@@ -1613,34 +1613,34 @@
          so the recolor must cover it or the first row's border stays ink-dark. */
       html[data-console-theme="light"] .divide-ink-600 > :not(:last-child),
       html[data-console-theme="light"] .divide-ink-700 > :not(:last-child) {
-        border-block-color: #e4e4e7;
-        border-color: #e4e4e7;
+        border-block-color: var(--primary);
+        border-color: var(--primary);
       }
 
       html[data-console-theme="light"] .text-zinc-50,
       html[data-console-theme="light"] .text-zinc-100,
       html[data-console-theme="light"] .text-zinc-200,
       html[data-console-theme="light"] .text-zinc-300 {
-        color: #3f3f46;
+        color: var(--input);
       }
 
       html[data-console-theme="light"] .text-zinc-400 {
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .text-zinc-500 {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .text-zinc-600 {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       /* Composer: plain-CSS component classes, so the utility-class remaps
          above never reach them — they need their own light overrides. */
       html[data-console-theme="light"] .console-composer-box {
         border-color: rgba(16, 16, 18, 0.14);
-        background: #ffffff;
+        background: var(--foreground);
       }
 
       html[data-console-theme="light"] .console-composer-box:focus-within {
@@ -1648,43 +1648,43 @@
       }
 
       html[data-console-theme="light"] .console-composer-input {
-        color: #1f1f22;
+        color: var(--secondary);
       }
 
       html[data-console-theme="light"] .console-composer-input::placeholder {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-composer-model-trigger {
         background: transparent;
-        color: #52525b;
+        color: var(--ring);
       }
 
       html[data-console-theme="light"] .console-composer-model-trigger:hover,
       html[data-console-theme="light"] .console-composer-model-trigger[aria-expanded="true"] {
         background: rgba(16, 16, 18, 0.1);
-        color: #1f1f22;
+        color: var(--secondary);
       }
 
       html[data-console-theme="light"] .console-composer-model-check {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-composer-menu-value,
       html[data-console-theme="light"] .console-composer-menu-chevron {
-        color: #a1a1aa;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-thinking-pending {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-composer-send {
-        color: #ffffff;
+        color: var(--foreground);
       }
 
       html[data-console-theme="light"] .console-new-chat-title {
-        color: #1f1f22;
+        color: var(--secondary);
       }
 
       /* The mobile top bar (hamburger + brand) and the drawer scrim are hidden
@@ -1712,20 +1712,20 @@
         cursor: pointer;
         place-items: center;
         border-radius: 0.625rem;
-        color: #d4d4d8;
+        color: var(--primary);
         transition: background 120ms ease, color 120ms ease;
       }
 
       .console-mobile-nav-toggle:hover {
         background: rgba(255, 255, 255, 0.06);
-        color: #f4f4f5;
+        color: var(--foreground);
       }
 
       .console-mobile-brand {
         display: flex;
         min-width: 0;
         align-items: center;
-        color: #f4f4f5;
+        color: var(--foreground);
         text-decoration: none;
       }
 
@@ -1746,21 +1746,21 @@
       }
 
       html[data-console-theme="light"] .console-mobile-bar {
-        border-bottom-color: #e4e4e7;
+        border-bottom-color: var(--primary);
         background: rgba(251, 251, 248, 0.92);
       }
 
       html[data-console-theme="light"] .console-mobile-nav-toggle {
-        color: #71717a;
+        color: var(--muted-foreground);
       }
 
       html[data-console-theme="light"] .console-mobile-nav-toggle:hover {
-        background: #f4f4f5;
-        color: #27272a;
+        background: var(--foreground);
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-mobile-brand {
-        color: #27272a;
+        color: var(--border);
       }
 
       html[data-console-theme="light"] .console-mobile-brand img {
