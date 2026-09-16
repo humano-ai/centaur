@@ -8,19 +8,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Monochrome accent: the UI is black and white, so the former brand
-        // ramp resolves to neutrals (light values read as accents on the dark
-        // chrome, dark values sit under light text).
-        centaur: {
-          50: '#ffffff', 100: '#fafafa', 200: '#f4f4f5',
-          300: '#e4e4e7', 400: '#d4d4d8', 500: '#e8e8ea',
-          600: '#a1a1aa', 700: '#71717a', 800: '#52525b', 900: '#3f3f46'
+        // Fyndry is monochrome: one neutral ramp, no brand hue. `accent`
+        // (aliased as `centaur` so upstream class names keep working) is the
+        // light end used for emphasis on the dark chrome; `ink` is the surface
+        // ramp from page black to raised borders.
+        accent: {
+          50: '#ffffff', 100: '#fafafa', 200: '#f4f4f5', 300: '#e4e4e7',
+          400: '#d4d4d8', 500: '#c4c4c8', 600: '#a1a1aa', 700: '#71717a',
+          800: '#52525b', 900: '#3f3f46'
         },
-        // Near-black neutral surfaces matching centaur.run (#050506 page,
-        // #101012 / #111114 surfaces, #17171a sunk).
+        centaur: {
+          50: '#ffffff', 100: '#fafafa', 200: '#f4f4f5', 300: '#e4e4e7',
+          400: '#d4d4d8', 500: '#c4c4c8', 600: '#a1a1aa', 700: '#71717a',
+          800: '#52525b', 900: '#3f3f46'
+        },
         ink: {
-          950: '#050506', 900: '#070708', 850: '#0b0b0d', 800: '#101012',
-          700: '#17171a', 600: '#242427', 500: '#33333a'
+          950: '#000000', 900: '#050506', 850: '#09090b', 800: '#101012',
+          700: '#18181b', 600: '#1f1f22', 500: '#27272a', 400: '#3f3f46'
         }
       },
       fontFamily: {

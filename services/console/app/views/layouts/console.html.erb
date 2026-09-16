@@ -96,14 +96,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-      ::selection { background: #e8e8ea; color: #050506; }
+      ::selection { background: #e4e4e7; color: #050506; }
       html[data-console-theme="dark"] { color-scheme: dark; }
       html[data-console-theme="light"] { color-scheme: light; }
       .glow { filter: drop-shadow(0 0 14px rgba(244, 244, 245,0.45)); }
       *::-webkit-scrollbar { width: 10px; height: 10px; }
-      *::-webkit-scrollbar-track { background: #0b0b0d; }
-      *::-webkit-scrollbar-thumb { background: #33333a; border-radius: 1px; }
-      *::-webkit-scrollbar-thumb:hover { background: #e8e8ea; }
+      *::-webkit-scrollbar-track { background: #09090b; }
+      *::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 1px; }
+      *::-webkit-scrollbar-thumb:hover { background: #e4e4e7; }
 
       .console-shell {
         display: flex;
@@ -160,7 +160,7 @@
         min-height: 0;
         flex-direction: column;
         border-right: 1px solid rgba(255, 255, 255, 0.07);
-        background: #070708;
+        background: #050506;
         transition: width 160ms ease;
       }
 
@@ -319,7 +319,7 @@
         width: 0.3rem;
         transform: translateY(-50%);
         border-radius: 999px;
-        background: #e8e8ea;
+        background: #e4e4e7;
       }
 
       .console-thread-link-open[data-console-pane-index]::before {
@@ -473,7 +473,7 @@
         cursor: pointer;
         list-style: none;
         user-select: none;
-        color: #8b8b94;
+        color: #a1a1aa;
         font-size: 0.8125rem;
         line-height: 1.35;
         border-radius: 0.5rem;
@@ -498,7 +498,7 @@
 
       .console-thinking-summary:hover {
         background: rgba(255, 255, 255, 0.045);
-        color: #c4c4cc;
+        color: #c4c4c8;
       }
 
       .console-thinking-chevron {
@@ -523,7 +523,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #6f7078;
+        color: #71717a;
       }
 
       .console-thinking-title {
@@ -548,7 +548,7 @@
 
       .console-thinking-failed::before {
         content: ",";
-        color: #8b8b94;
+        color: #a1a1aa;
         margin-right: 0.35rem;
       }
 
@@ -558,7 +558,7 @@
 
       .console-thinking-body {
         margin-top: 0.35rem;
-        color: #8b8b94;
+        color: #a1a1aa;
       }
 
       /* Roomy enough that adjacent rows' hover pills (which extend 0.2rem
@@ -767,12 +767,12 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         padding: 0.5rem 0.625rem;
-        color: #8b8b94;
+        color: #a1a1aa;
         font-size: 0.75rem;
       }
 
       .console-account-menu-muted {
-        color: #5f6068;
+        color: #52525b;
       }
 
       .console-account-menu-separator {
@@ -1088,7 +1088,7 @@
       /* "Thinking…" placeholder while a turn is executing, painted both by
          the server (_thinking_indicator) and the composer's optimistic JS. */
       .console-thinking-pending {
-        color: #8b8b94;
+        color: #a1a1aa;
         font-size: 0.875rem;
         line-height: 1.5;
         animation: console-thinking-pulse 1.6s ease-in-out infinite;
@@ -1106,8 +1106,8 @@
         flex: 0 0 auto;
         place-items: center;
         border-radius: 999px;
-        background: #e8e8ea;
-        color: #0b0b0d;
+        background: #e4e4e7;
+        color: #09090b;
         transition: background 120ms ease;
       }
 
@@ -1178,12 +1178,12 @@
       }
 
       .console-control-tab-active {
-        border-color: #e8e8ea;
+        border-color: #e4e4e7;
         color: #f4f4f5;
       }
 
       .console-run-row {
-        background: rgba(11, 11, 13, 0.45);
+        background: rgba(9, 9, 11, 0.45);
         color: #71717a;
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
       }
@@ -1198,19 +1198,19 @@
 
       html[data-console-theme="light"] ::selection {
         background: rgba(244, 244, 245, 0.22);
-        color: #1f2428;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-track {
-        background: #f3f3ef;
+        background: #f4f4f5;
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-thumb {
-        background: #c9cbc5;
+        background: #c4c4c8;
       }
 
       html[data-console-theme="light"] *::-webkit-scrollbar-thumb:hover {
-        background: #28a65d;
+        background: #71717a;
       }
 
       html[data-console-theme="light"] body,
@@ -1218,13 +1218,13 @@
       html[data-console-theme="light"] .console-main,
       html[data-console-theme="light"] .console-main-page,
       html[data-console-theme="light"] .console-main-thread-frame {
-        background: #f6f6f2;
-        color: #303438;
+        background: #f4f4f5;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-sidebar {
-        border-right-color: #deded7;
-        background: #fbfbf8;
+        border-right-color: #e4e4e7;
+        background: #fafafa;
       }
 
       /* Amber notice boxes (thread-DB unavailable, managed secret) keep their
@@ -1238,11 +1238,11 @@
       }
 
       html[data-console-theme="light"] .console-sidebar-account {
-        border-top-color: #deded7;
+        border-top-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-brand {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-brand-lockup img,
@@ -1254,7 +1254,7 @@
       html[data-console-theme="light"] .console-thread-group-title,
       html[data-console-theme="light"] .console-account-menu-button,
       html[data-console-theme="light"] .console-signout-button {
-        color: #5f656c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-nav-link:hover,
@@ -1264,27 +1264,27 @@
       html[data-console-theme="light"] .console-account-button[aria-expanded="true"],
       html[data-console-theme="light"] .console-account-menu-button:hover,
       html[data-console-theme="light"] .console-signout-button:hover {
-        background: #edede8;
-        color: #24272b;
+        background: #f4f4f5;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-nav-link-active,
       html[data-console-theme="light"] .console-thread-group-title-active,
       html[data-console-theme="light"] .console-thread-link-active {
-        background: #e7eee8;
+        background: #e4e4e7;
         color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-thread-link {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-thread-link-open {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-thread-link-open::before {
-        background: #28a65d;
+        background: #71717a;
       }
 
       html[data-console-theme="light"] .console-thread-link-open[data-console-pane-index]::before {
@@ -1297,52 +1297,52 @@
       html[data-console-theme="light"] .console-thread-show-all,
       html[data-console-theme="light"] .console-account-email,
       html[data-console-theme="light"] .console-page-meta {
-        color: #7a7f86;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-thread-show-all:hover {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-panel-close {
-        color: #7a7f86;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-panel-close:hover {
-        background: #e8e9e3;
-        color: #24272b;
+        background: #e4e4e7;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-thread-share-trigger {
-        color: #7a7f86;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-thread-share-trigger:hover {
-        background: #e8e9e3;
-        color: #24272b;
+        background: #e4e4e7;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-share-dialog {
-        border-color: #d8d8d0;
+        border-color: #d4d4d8;
         background: #ffffff;
-        color: #565c63;
-        box-shadow: 0 24px 70px rgba(31, 36, 40, 0.2);
+        color: #52525b;
+        box-shadow: 0 24px 70px rgba(39, 39, 42, 0.2);
       }
 
       html[data-console-theme="light"] .console-share-dialog::backdrop {
-        background: rgba(36, 39, 43, 0.38);
+        background: rgba(39, 39, 42, 0.38);
       }
 
       html[data-console-theme="light"] .console-share-dialog-copy h2 {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-share-dialog-copy > p:not(.console-share-dialog-error) {
-        color: #6f757c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-share-dialog-actions {
-        border-top-color: #e5e5de;
+        border-top-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-share-dialog-error {
@@ -1350,24 +1350,24 @@
       }
 
       html[data-console-theme="light"] .console-thinking-summary {
-        color: #565c63;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-thinking-summary:hover,
       html[data-console-theme="light"] .console-thinking-command-row:hover {
-        background: #e8e9e3;
+        background: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-thinking-summary:hover {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-thinking-preview {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-thinking-title {
-        color: #41454a;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-thinking-failed,
@@ -1376,7 +1376,7 @@
       }
 
       html[data-console-theme="light"] .console-command-prompt {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-command-prompt--failed {
@@ -1384,167 +1384,167 @@
       }
 
       html[data-console-theme="light"] .console-markdown table th {
-        border-bottom-color: #d3d3cb;
+        border-bottom-color: #d4d4d8;
       }
 
       html[data-console-theme="light"] .console-markdown table td {
-        border-bottom-color: #e5e5de;
+        border-bottom-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-thinking-body {
-        color: #565c63;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-thinking-command-row {
-        color: #595f66;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-thinking-command-row:hover {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-thinking-command-chevron {
-        color: #7a7f86;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-thinking-command-output {
-        border-color: #e8e8e2;
+        border-color: #e4e4e7;
         background: #ffffff;
-        color: #565c63;
+        color: #52525b;
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
       }
 
       html[data-console-theme="light"] .console-thinking-command-full {
-        border-bottom-color: #ecece6;
-        color: #303438;
+        border-bottom-color: #e4e4e7;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-thinking-command-result {
-        color: #565c63;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-thinking-command-empty {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-user-avatar {
-        background: #dff2e7;
-        color: #12733f;
+        background: #f4f4f5;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-account-menu {
-        border-color: #d8d8d0;
+        border-color: #d4d4d8;
         background: #ffffff;
-        box-shadow: 0 18px 45px rgba(31, 36, 40, 0.12);
+        box-shadow: 0 18px 45px rgba(39, 39, 42, 0.12);
       }
 
       html[data-console-theme="light"] .console-account-menu-line {
-        color: #5f656c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-account-menu-muted {
-        color: #8a8f96;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-account-menu-separator {
-        background: #e5e5de;
+        background: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-control-tabs {
-        border-bottom-color: #deded7;
+        border-bottom-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-thread-detail-header {
-        border-bottom-color: #deded7;
+        border-bottom-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-control-tab {
-        color: #6b7078;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-control-tab:hover {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-control-tab-active {
-        border-color: #28a65d;
+        border-color: #71717a;
         color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-run-row {
         background: #ffffff;
-        color: #6f757c;
-        box-shadow: inset 0 0 0 1px #deded7;
+        color: #71717a;
+        box-shadow: inset 0 0 0 1px #e4e4e7;
       }
 
       html[data-console-theme="light"] .console-run-status {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .console-run-id {
-        color: #7a7f86;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .form-section,
       html[data-console-theme="light"] .console-panel,
       html[data-console-theme="light"] .console-scroll-panel {
-        border-color: #deded7;
+        border-color: #e4e4e7;
         background: #ffffff;
       }
 
       html[data-console-theme="light"] .console-table-head {
-        background: #f0f0eb;
-        color: #7a7f86;
+        background: #f4f4f5;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-table > thead {
-        border-block-end-color: #e6e5de;
-        border-bottom-color: #e6e5de;
+        border-block-end-color: #e4e4e7;
+        border-bottom-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .role-pill {
-        background: #eaf6ff;
+        background: #f4f4f5;
         color: #0369a1;
         --tw-ring-color: rgb(14 165 233 / 0.3);
       }
 
       html[data-console-theme="light"] .form-input {
-        border-color: #d2d3cc;
+        border-color: #d4d4d8;
         background: #ffffff;
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .form-input::placeholder,
       html[data-console-theme="light"] .placeholder-zinc-500::placeholder,
       html[data-console-theme="light"] .placeholder-zinc-600::placeholder {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .btn-secondary {
-        border-color: #d2d3cc;
-        color: #5f656c;
+        border-color: #d4d4d8;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .page-title {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .page-subtitle {
-        color: #6f757c;
+        color: #71717a;
       }
 
       /* Toggle chips (filter tabs, HTTP methods): the component's @apply'd
          ink colors compile to raw values, so the utility-class remaps above
          don't reach them -- restyle the component classes directly. */
       html[data-console-theme="light"] .chip {
-        border-color: #d2d3cc;
+        border-color: #d4d4d8;
         background: #ffffff;
-        color: #5f656c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .chip:hover {
         border-color: #a1a1aa80;
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .chip-on,
@@ -1555,9 +1555,9 @@
       }
 
       html[data-console-theme="light"] .empty-state {
-        border-color: #d8d8d0;
-        background: #f0f0eb;
-        color: #8c9198;
+        border-color: #d4d4d8;
+        background: #f4f4f5;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-link,
@@ -1575,7 +1575,7 @@
       html[data-console-theme="light"] .bg-ink-900\/25,
       html[data-console-theme="light"] .bg-ink-900\/35,
       html[data-console-theme="light"] .bg-ink-900\/80 {
-        background-color: #f6f6f2;
+        background-color: #f4f4f5;
       }
 
       html[data-console-theme="light"] .bg-ink-850,
@@ -1593,19 +1593,19 @@
       }
 
       html[data-console-theme="light"] .bg-ink-600 {
-        background-color: #e8e9e3;
+        background-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .border-ink-500,
       html[data-console-theme="light"] .border-ink-600,
       html[data-console-theme="light"] .border-ink-600\/80,
       html[data-console-theme="light"] .border-ink-700 {
-        border-color: #deded7;
+        border-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .ring-ink-500,
       html[data-console-theme="light"] .ring-ink-600 {
-        --tw-ring-color: #d8d8d0;
+        --tw-ring-color: #d4d4d8;
       }
 
       /* Tailwind v4 puts divide-y borders on `> :not(:last-child)` (border-bottom),
@@ -1613,70 +1613,70 @@
          so the recolor must cover it or the first row's border stays ink-dark. */
       html[data-console-theme="light"] .divide-ink-600 > :not(:last-child),
       html[data-console-theme="light"] .divide-ink-700 > :not(:last-child) {
-        border-block-color: #deded7;
-        border-color: #deded7;
+        border-block-color: #e4e4e7;
+        border-color: #e4e4e7;
       }
 
       html[data-console-theme="light"] .text-zinc-50,
       html[data-console-theme="light"] .text-zinc-100,
       html[data-console-theme="light"] .text-zinc-200,
       html[data-console-theme="light"] .text-zinc-300 {
-        color: #303438;
+        color: #3f3f46;
       }
 
       html[data-console-theme="light"] .text-zinc-400 {
-        color: #565c63;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .text-zinc-500 {
-        color: #6f757c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .text-zinc-600 {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       /* Composer: plain-CSS component classes, so the utility-class remaps
          above never reach them — they need their own light overrides. */
       html[data-console-theme="light"] .console-composer-box {
-        border-color: rgba(15, 18, 20, 0.14);
+        border-color: rgba(16, 16, 18, 0.14);
         background: #ffffff;
       }
 
       html[data-console-theme="light"] .console-composer-box:focus-within {
-        border-color: rgba(15, 18, 20, 0.3);
+        border-color: rgba(16, 16, 18, 0.3);
       }
 
       html[data-console-theme="light"] .console-composer-input {
-        color: #1c1f23;
+        color: #1f1f22;
       }
 
       html[data-console-theme="light"] .console-composer-input::placeholder {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-composer-model-trigger {
         background: transparent;
-        color: #565c63;
+        color: #52525b;
       }
 
       html[data-console-theme="light"] .console-composer-model-trigger:hover,
       html[data-console-theme="light"] .console-composer-model-trigger[aria-expanded="true"] {
-        background: rgba(15, 18, 20, 0.1);
-        color: #1c1f23;
+        background: rgba(16, 16, 18, 0.1);
+        color: #1f1f22;
       }
 
       html[data-console-theme="light"] .console-composer-model-check {
-        color: #1f9d55;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-composer-menu-value,
       html[data-console-theme="light"] .console-composer-menu-chevron {
-        color: #8c9198;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-thinking-pending {
-        color: #6f757c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-composer-send {
@@ -1684,7 +1684,7 @@
       }
 
       html[data-console-theme="light"] .console-new-chat-title {
-        color: #1c1f23;
+        color: #1f1f22;
       }
 
       /* The mobile top bar (hamburger + brand) and the drawer scrim are hidden
@@ -1700,7 +1700,7 @@
         gap: 0.75rem;
         padding: 0 0.75rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-        background: rgba(7, 7, 8, 0.92);
+        background: rgba(5, 5, 6, 0.92);
         backdrop-filter: blur(8px);
       }
 
@@ -1746,21 +1746,21 @@
       }
 
       html[data-console-theme="light"] .console-mobile-bar {
-        border-bottom-color: #deded7;
+        border-bottom-color: #e4e4e7;
         background: rgba(251, 251, 248, 0.92);
       }
 
       html[data-console-theme="light"] .console-mobile-nav-toggle {
-        color: #5f656c;
+        color: #71717a;
       }
 
       html[data-console-theme="light"] .console-mobile-nav-toggle:hover {
-        background: #edede8;
-        color: #24272b;
+        background: #f4f4f5;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-mobile-brand {
-        color: #24272b;
+        color: #27272a;
       }
 
       html[data-console-theme="light"] .console-mobile-brand img {
