@@ -25,7 +25,7 @@ module ApplicationHelper
   # controller) so Tailwind's content scanner picks up the color classes.
   def credential_status_classes(status)
     case status
-    when "live" then "bg-emerald-500/10 text-emerald-300 ring-emerald-500/25"
+    when "live" then "bg-zinc-500/10 text-zinc-300 ring-zinc-500/25"
     when "dead" then "bg-red-500/10 text-red-300 ring-red-500/25"
     else "bg-amber-500/10 text-amber-300 ring-amber-500/25"
     end

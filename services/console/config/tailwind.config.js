@@ -8,11 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Centaur brand accent (green), centered on #28c26a from centaur.run.
+        // Monochrome accent: the UI is black and white, so the former brand
+        // ramp resolves to neutrals (light values read as accents on the dark
+        // chrome, dark values sit under light text).
         centaur: {
-          50: '#e8faf0', 100: '#c6f3da', 200: '#93e7b7',
-          300: '#5cd793', 400: '#3ace79', 500: '#28c26a',
-          600: '#1ea358', 700: '#1a8147', 800: '#18653a', 900: '#155330'
+          50: '#ffffff', 100: '#fafafa', 200: '#f4f4f5',
+          300: '#e4e4e7', 400: '#d4d4d8', 500: '#e8e8ea',
+          600: '#a1a1aa', 700: '#71717a', 800: '#52525b', 900: '#3f3f46'
         },
         // Near-black neutral surfaces matching centaur.run (#050506 page,
         // #101012 / #111114 surfaces, #17171a sunk).

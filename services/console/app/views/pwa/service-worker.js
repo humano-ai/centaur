@@ -1,4 +1,4 @@
-// Service worker for the installed Foundry Console PWA.
+// Service worker for the installed Fyndry Console PWA.
 //
 // Deliberately conservative: console pages are session-authenticated and
 // server-rendered, so HTML is never cached. Navigations go straight to the
@@ -30,7 +30,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("push", (event) => {
   if (!event.data) return
   const { title, options } = event.data.json()
-  event.waitUntil(self.registration.showNotification(title || "Foundry Console", options))
+  event.waitUntil(self.registration.showNotification(title || "Fyndry Console", options))
 })
 
 self.addEventListener("notificationclick", (event) => {

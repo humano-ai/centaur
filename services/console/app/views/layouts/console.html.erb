@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
   <head>
-    <title><%= content_for(:title) || "Foundry Console" %></title>
+    <title><%= content_for(:title) || "Fyndry Console" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
@@ -96,14 +96,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-      ::selection { background: #28c26a; color: #050506; }
+      ::selection { background: #e8e8ea; color: #050506; }
       html[data-console-theme="dark"] { color-scheme: dark; }
       html[data-console-theme="light"] { color-scheme: light; }
-      .glow { filter: drop-shadow(0 0 14px rgba(40,194,106,0.45)); }
+      .glow { filter: drop-shadow(0 0 14px rgba(244, 244, 245,0.45)); }
       *::-webkit-scrollbar { width: 10px; height: 10px; }
       *::-webkit-scrollbar-track { background: #0b0b0d; }
       *::-webkit-scrollbar-thumb { background: #33333a; border-radius: 1px; }
-      *::-webkit-scrollbar-thumb:hover { background: #28c26a; }
+      *::-webkit-scrollbar-thumb:hover { background: #e8e8ea; }
 
       .console-shell {
         display: flex;
@@ -232,7 +232,7 @@
 
       .console-nav-link-active {
         background: rgba(255, 255, 255, 0.07);
-        color: #3ace79;
+        color: #f4f4f5;
       }
 
       .console-nav-icon {
@@ -279,7 +279,7 @@
 
       .console-thread-group-title-active {
         background: rgba(255, 255, 255, 0.07);
-        color: #3ace79;
+        color: #f4f4f5;
       }
 
       .console-thread-list {
@@ -319,7 +319,7 @@
         width: 0.3rem;
         transform: translateY(-50%);
         border-radius: 999px;
-        background: #28c26a;
+        background: #e8e8ea;
       }
 
       .console-thread-link-open[data-console-pane-index]::before {
@@ -329,7 +329,7 @@
         width: auto;
         border-radius: 0;
         background: none;
-        color: #3ace79;
+        color: #f4f4f5;
         font-size: 0.6875rem;
         font-weight: 700;
         line-height: 1;
@@ -729,8 +729,8 @@
         flex: 0 0 auto;
         place-items: center;
         border-radius: 999px;
-        background: rgba(40, 194, 106, 0.16);
-        color: #93e7b7;
+        background: rgba(244, 244, 245, 0.16);
+        color: #f4f4f5;
         font-size: 0.75rem;
         font-weight: 700;
       }
@@ -1082,7 +1082,7 @@
       .console-composer-model-check {
         display: grid;
         place-items: center;
-        color: #3ace79;
+        color: #f4f4f5;
       }
 
       /* "Thinking…" placeholder while a turn is executing, painted both by
@@ -1106,13 +1106,13 @@
         flex: 0 0 auto;
         place-items: center;
         border-radius: 999px;
-        background: #28c26a;
+        background: #e8e8ea;
         color: #0b0b0d;
         transition: background 120ms ease;
       }
 
       .console-composer-send:hover {
-        background: #3ace79;
+        background: #f4f4f5;
       }
 
       /* Full-page New-chat composer. Its resting state sits a bit above
@@ -1178,8 +1178,8 @@
       }
 
       .console-control-tab-active {
-        border-color: #28c26a;
-        color: #3ace79;
+        border-color: #e8e8ea;
+        color: #f4f4f5;
       }
 
       .console-run-row {
@@ -1197,7 +1197,7 @@
       }
 
       html[data-console-theme="light"] ::selection {
-        background: rgba(40, 194, 106, 0.22);
+        background: rgba(244, 244, 245, 0.22);
         color: #1f2428;
       }
 
@@ -1247,7 +1247,7 @@
 
       html[data-console-theme="light"] .console-brand-lockup img,
       html[data-console-theme="light"] .console-brand-glyph img {
-        filter: invert(1) drop-shadow(0 0 14px rgba(40, 194, 106, 0.14));
+        filter: invert(1) drop-shadow(0 0 14px rgba(244, 244, 245, 0.14));
       }
 
       html[data-console-theme="light"] .console-nav-link,
@@ -1272,7 +1272,7 @@
       html[data-console-theme="light"] .console-thread-group-title-active,
       html[data-console-theme="light"] .console-thread-link-active {
         background: #e7eee8;
-        color: #168f4a;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-thread-link {
@@ -1289,7 +1289,7 @@
 
       html[data-console-theme="light"] .console-thread-link-open[data-console-pane-index]::before {
         background: none;
-        color: #168f4a;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-thread-time,
@@ -1468,7 +1468,7 @@
 
       html[data-console-theme="light"] .console-control-tab-active {
         border-color: #28a65d;
-        color: #168f4a;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .console-run-row {
@@ -1543,15 +1543,15 @@
       }
 
       html[data-console-theme="light"] .chip:hover {
-        border-color: #168f4a80;
+        border-color: #a1a1aa80;
         color: #303438;
       }
 
       html[data-console-theme="light"] .chip-on,
       html[data-console-theme="light"] .chip-on:hover {
-        border-color: #168f4a;
-        background: rgba(22, 143, 74, 0.08);
-        color: #168f4a;
+        border-color: #a1a1aa;
+        background: rgba(212, 212, 216, 0.08);
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .empty-state {
@@ -1564,7 +1564,7 @@
       html[data-console-theme="light"] .text-centaur-300,
       html[data-console-theme="light"] .text-centaur-400,
       html[data-console-theme="light"] .text-centaur-500 {
-        color: #168f4a;
+        color: #a1a1aa;
       }
 
       html[data-console-theme="light"] .bg-ink-950,
@@ -1764,7 +1764,7 @@
       }
 
       html[data-console-theme="light"] .console-mobile-brand img {
-        filter: invert(1) drop-shadow(0 0 14px rgba(40, 194, 106, 0.14));
+        filter: invert(1) drop-shadow(0 0 14px rgba(244, 244, 245, 0.14));
       }
 
       /* Mobile: the 18rem rail squeezes the content to a sliver, so below this
@@ -1842,12 +1842,12 @@
     <div id="console-shell" class="console-shell">
       <aside class="console-sidebar" aria-label="Console navigation">
         <div class="console-sidebar-top">
-          <a href="<%= root_path %>" class="console-brand" aria-label="Foundry Console">
+          <a href="<%= root_path %>" class="console-brand" aria-label="Fyndry Console">
             <span class="console-brand-glyph">
               <%= image_tag "/icon.svg", alt: "", aria: { hidden: true }, width: 275, height: 275 %>
             </span>
             <span class="console-brand-lockup">
-              <%= image_tag "foundry-lockup-white.svg", alt: "Foundry", class: "glow", width: 497, height: 127 %>
+              <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 497, height: 127 %>
             </span>
           </a>
         </div>
@@ -1964,7 +1964,7 @@
                  aria-labelledby="console-account-menu-button"
                  hidden>
               <div class="console-account-menu-line" title="<%= current_user.email %>"><%= current_user.email %></div>
-              <div class="console-account-menu-line console-account-menu-muted">Foundry Console</div>
+              <div class="console-account-menu-line console-account-menu-muted">Fyndry Console</div>
               <div class="console-account-menu-separator"></div>
               <%# PWA install entry point. Hidden unless the browser reports
                   the console is installable (beforeinstallprompt); installing
@@ -1977,7 +1977,7 @@
                       data-action="pwa-install#install"
                       hidden
                       role="menuitem"
-                      title="Install Foundry Console as a standalone app"
+                      title="Install Fyndry Console as a standalone app"
                       aria-label="Install app">
                 <%= console_icon("computer", classes: "size-4") %>
                 <span>Install app</span>
@@ -2030,8 +2030,8 @@
                   data-console-nav-toggle>
             <%= console_icon("menu", classes: "size-5") %>
           </button>
-          <a href="<%= root_path %>" class="console-mobile-brand" aria-label="Foundry Console">
-            <%= image_tag "foundry-lockup-white.svg", alt: "Foundry", class: "glow", width: 497, height: 127 %>
+          <a href="<%= root_path %>" class="console-mobile-brand" aria-label="Fyndry Console">
+            <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 497, height: 127 %>
           </a>
         </div>
         <div class="<%= threads_view ? "console-main-thread-frame" : "console-main-page" %>">

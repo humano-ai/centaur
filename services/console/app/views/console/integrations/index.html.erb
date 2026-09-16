@@ -1,8 +1,8 @@
-<% content_for :title, "Integrations · Foundry Console" %>
+<% content_for :title, "Integrations · Fyndry Console" %>
 
 <%= render "console/page_header",
            title: "Integrations",
-           subtitle: "Connect your accounts so Foundry can act on your behalf." %>
+           subtitle: "Connect your accounts so Fyndry can act on your behalf." %>
 
 <% if @oauth_apps.empty? %>
   <p class="empty-state">No integrations available yet.</p>
@@ -32,8 +32,8 @@
           <% if credential %>
             <% needs_reconnect = app.credential_needs_reconnect?(credential) %>
             <a href="<%= start_url %>" class="btn-secondary inline-block">Reconnect</a>
-            <span class="flex items-center gap-1.5 text-xs <%= needs_reconnect ? "text-amber-300" : "text-emerald-300" %>">
-              <span class="size-1.5 rounded-full <%= needs_reconnect ? "bg-amber-400" : "bg-emerald-400" %>"></span>
+            <span class="flex items-center gap-1.5 text-xs <%= needs_reconnect ? "text-amber-300" : "text-zinc-300" %>">
+              <span class="size-1.5 rounded-full <%= needs_reconnect ? "bg-amber-400" : "bg-zinc-400" %>"></span>
               <%= needs_reconnect ? "Needs reconnecting" : "Connected" %>
             </span>
           <% else %>
@@ -43,5 +43,5 @@
       </div>
     <% end %>
   </div>
-  <p class="mt-6 text-xs text-zinc-600">Connecting opens the provider's consent screen. Once you approve, Foundry stores and refreshes the credential automatically.</p>
+  <p class="mt-6 text-xs text-zinc-600">Connecting opens the provider's consent screen. Once you approve, Fyndry stores and refreshes the credential automatically.</p>
 <% end %>

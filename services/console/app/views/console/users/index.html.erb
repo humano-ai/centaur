@@ -1,4 +1,4 @@
-<% content_for :title, "Users · Foundry Console" %>
+<% content_for :title, "Users · Fyndry Console" %>
 
 <%= render "console/control_tabs" %>
 
@@ -21,7 +21,7 @@
             <td class="console-td text-zinc-500">requested <%= time_ago_in_words(user.created_at) %> ago</td>
             <td class="console-td text-right">
               <%= button_to "Approve", approve_console_user_path(user.oid), method: :post,
-                    class: "cursor-pointer rounded border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-emerald-300 transition-colors hover:bg-emerald-500/20" %>
+                    class: "cursor-pointer rounded border border-zinc-500/40 bg-zinc-500/10 px-3 py-1.5 text-zinc-300 transition-colors hover:bg-zinc-500/20" %>
             </td>
           </tr>
         <% end %>

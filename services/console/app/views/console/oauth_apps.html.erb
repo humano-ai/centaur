@@ -1,4 +1,4 @@
-<% content_for :title, "Apps · Foundry Console" %>
+<% content_for :title, "Apps · Fyndry Console" %>
 
 <%= render "console/control_tabs" %>
 
@@ -42,7 +42,7 @@
             <td class="console-td-nowrap text-zinc-400"><%= truncate_middle(a.client_id) %></td>
             <td class="console-td-nowrap">
               <% if a.enabled? %>
-                <span class="rounded px-2 py-0.5 text-xs ring-1 bg-emerald-500/10 text-emerald-300 ring-emerald-500/25">enabled</span>
+                <span class="rounded px-2 py-0.5 text-xs ring-1 bg-zinc-500/10 text-zinc-300 ring-zinc-500/25">enabled</span>
               <% else %>
                 <span class="rounded px-2 py-0.5 text-xs ring-1 bg-zinc-500/10 text-zinc-400 ring-zinc-500/25">disabled</span>
               <% end %>
