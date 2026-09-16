@@ -1916,19 +1916,32 @@
             threads.hidden = isCollapsed;
           });
         };
-        document.addEventListener("click", event => {
-          const toggle = event.target.closest("[data-console-channel-toggle]");
-          if (!toggle) return;
-          const group = toggle.closest("[data-console-channel-group]");
-          const name = group?.getAttribute("data-console-channel-group");
-          if (!name) return;
-          const collapsed = collapsedChannels();
-          collapsed.has(name) ? collapsed.delete(name) : collapsed.add(name);
-          persistCollapsedChannels(collapsed);
-          syncChannelGroups();
-        });
-        document.addEventListener("turbo:load", syncChannelGroups);
-        document.addEventListener("turbo:frame-load", syncChannelGroups);
+        // This inline script re-runs on every Turbo visit, so the listeners are
+        // registered once per document: a second click listener would toggle the
+        // channel straight back and look like nothing happened.
+        if (!window.__consoleChannelTogglesBound) {
+          window.__consoleChannelTogglesBound = true;
+          document.addEventListener("click", event => {
+            const target = event.target instanceof Element ? event.target : null;
+            const toggle = target?.closest("[data-console-channel-toggle]");
+            if (!toggle) return;
+            const group = toggle.closest("[data-console-channel-group]");
+            const name = group && group.getAttribute("data-console-channel-group");
+            if (!name) return;
+            event.preventDefault();
+            const collapsed = collapsedChannels();
+            if (collapsed.has(name)) {
+              collapsed.delete(name);
+            } else {
+              collapsed.add(name);
+            }
+            persistCollapsedChannels(collapsed);
+            window.__consoleSyncChannelGroups?.();
+          });
+          document.addEventListener("turbo:load", () => window.__consoleSyncChannelGroups?.());
+          document.addEventListener("turbo:frame-load", () => window.__consoleSyncChannelGroups?.());
+        }
+        window.__consoleSyncChannelGroups = syncChannelGroups;
         syncChannelGroups();
 
         const themeToggle = document.querySelector("[data-console-theme-toggle]");
