@@ -1,6 +1,6 @@
 """Slack client for posting messages and uploading files into a thread."""
 
-import os
+import json
 import pathlib
 
 import httpx
@@ -12,14 +12,19 @@ BASE_URL = "https://slack.com/api"
 
 class SlackClient:
     def __init__(self, timeout: float = 60.0):
+        self._token = secret("SLACK_BOT_TOKEN")
         self._http = httpx.Client(
             base_url=BASE_URL,
             timeout=timeout,
-            headers={"Authorization": f"Bearer {secret('SLACK_BOT_TOKEN')}"},
+            headers={"Authorization": f"Bearer {self._token}"},
         )
 
+    # Slack's Web API takes form-encoded parameters. JSON bodies are accepted
+    # only by a few methods, and the upload endpoints reject them with
+    # invalid_arguments, so every call here posts a form.
     def _call(self, method: str, **payload) -> dict:
-        resp = self._http.post(f"/{method}", json=payload)
+        form = {k: v for k, v in payload.items() if v is not None}
+        resp = self._http.post(f"/{method}", data=form)
         resp.raise_for_status()
         data = resp.json()
         if not data.get("ok"):
@@ -33,13 +38,15 @@ class SlackClient:
     def upload(self, channel: str, path: str, title: str | None = None, thread_ts: str | None = None) -> dict:
         """Upload a file to a channel or thread via Slack's external-upload flow."""
         file = pathlib.Path(path)
-        size = file.stat().st_size
-        ticket = self._call("files.getUploadURLExternal", filename=file.name, length=size)
-        put = self._http.put(ticket["upload_url"], content=file.read_bytes(), headers={"Authorization": ""})
-        put.raise_for_status()
+        body = file.read_bytes()
+        ticket = self._call("files.getUploadURLExternal", filename=file.name, length=len(body))
+        # The signed upload URL carries its own credentials: sending the bot
+        # token there fails, so this PUT uses a bare client.
+        with httpx.Client(timeout=self._http.timeout) as anon:
+            anon.post(ticket["upload_url"], files={"file": (file.name, body)}).raise_for_status()
         return self._call(
             "files.completeUploadExternal",
-            files=[{"id": ticket["file_id"], "title": title or file.name}],
+            files=json.dumps([{"id": ticket["file_id"], "title": title or file.name}]),
             channel_id=channel,
             thread_ts=thread_ts,
         )
