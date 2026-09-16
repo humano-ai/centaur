@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-full bg-ink-950">
+<html lang="en" class="min-h-full bg-background">
   <head>
     <title><%= content_for(:title) || "Fyndry Console" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,10 +19,15 @@
     <style>
       ::selection { background: var(--primary); color: var(--background); }
     </style>
+    <style>
+      @media (prefers-color-scheme: light) {
+        .auth-lockup img { filter: invert(1); }
+      }
+    </style>
   </head>
 
-  <body class="min-h-full bg-ink-950 text-zinc-300 font-sans antialiased">
-    <main class="flex min-h-screen items-center justify-center bg-ink-950 px-6 py-16">
+  <body class="min-h-full bg-background text-foreground font-sans antialiased">
+    <main class="flex min-h-screen items-center justify-center bg-background px-6 py-16">
       <div class="w-full max-w-sm">
         <%= yield %>
       </div>
