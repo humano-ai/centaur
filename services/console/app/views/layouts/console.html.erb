@@ -454,10 +454,26 @@
         font-weight: inherit;
       }
 
+      /* The title gets the row; the timestamp appears on hover/focus like bb,
+         so a thread name is readable instead of truncating after a few chars. */
       .console-thread-time {
         color: var(--subtle-foreground);
         font-size: var(--text-2xs, 0.625rem);
         font-variant-numeric: tabular-nums;
+        opacity: 0;
+        transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .console-thread-link:hover .console-thread-time,
+      .console-thread-link:focus-visible .console-thread-time,
+      .console-thread-link-active .console-thread-time {
+        opacity: 1;
+      }
+
+      @media (hover: none) {
+        .console-thread-time {
+          opacity: 1;
+        }
       }
 
       .console-panel-close {
