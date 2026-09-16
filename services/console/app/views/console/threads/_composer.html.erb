@@ -34,6 +34,17 @@
                        data: { console_composer_input: true } %>
     <span class="console-composer-hint" aria-hidden="true">↵</span>
     <div class="console-composer-controls">
+      <%# In-thread the harness and model are pinned server-side (a reply can't
+          switch them), so bb's picker slot shows what the thread runs on. %>
+      <% if thread_mode %>
+        <span class="console-composer-pinned-model" title="This thread's harness and model are fixed">
+          <% if (thread_model = thread_model_label(composer_session)) %>
+            <span class="truncate"><%= thread_model %></span>
+            <span aria-hidden="true">·</span>
+          <% end %>
+          <span><%= thread_harness_label(composer_session) %></span>
+        </span>
+      <% end %>
       <% unless thread_mode %>
         <% default_value = composer_default_agent_value %>
         <% default_agent = composer_agents.find { |agent| agent.value == default_value } %>

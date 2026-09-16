@@ -1027,6 +1027,19 @@
         flex: 1;
       }
 
+      /* Pinned harness/model text in the composer's picker slot. */
+      .console-composer-pinned-model {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        min-width: 0;
+        max-width: 16rem;
+        padding: 0 0.25rem;
+        color: var(--subtle-foreground);
+        font-size: var(--text-xs, 0.75rem);
+        line-height: 1.1;
+      }
+
       /* Model picker: a pill trigger opening a popover that reuses the
          account-menu panel/item classes, so both dropdowns share one design. */
       .console-composer-model {
