@@ -1,5 +1,5 @@
 <% title = @role.name.presence || @role.foreign_id.presence || @role.oid %>
-<% content_for :title, "Edit #{title} · Fyndry Console" %>
+<% content_for :title, "Edit #{title} · Fyndry (Nightly)" %>
 
 <div class="mb-8">
   <a href="<%= console_role_path(@role.oid) %>" class="back-link">← back to role</a>
