@@ -22,7 +22,6 @@
                 aria-expanded="true"
                 data-console-channel-toggle
                 title="<%= group_label %>">
-          <span class="console-channel-caret" aria-hidden="true"><%= console_icon("chevron-down", classes: "size-3") %></span>
           <% if console_sidebar_group_dm?(group_threads.first) %>
             <% avatar = console_sidebar_group_avatar_url(group_threads.first) %>
             <% if avatar && avatar["src"] %>
@@ -38,6 +37,7 @@
           <% end %>
           <span class="console-channel-name"><%= group_label %></span>
           <span class="console-channel-count"><%= group_threads.size %></span>
+          <span class="console-channel-caret" aria-hidden="true"><%= console_icon("chevron-down", classes: "size-3") %></span>
         </button>
         <div class="console-channel-threads" data-console-channel-threads>
       <% group_threads.each do |thread| %>
