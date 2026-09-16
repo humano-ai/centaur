@@ -386,20 +386,10 @@
         display: none;
       }
 
+      /* No rail: bb marks the thread you're in with a box, and the rows sit
+         directly under their channel. */
       .console-channel-threads {
-        position: relative;
-        margin-left: 0.9375rem;
         padding-left: 0.375rem;
-      }
-
-      .console-channel-threads::before {
-        content: "";
-        position: absolute;
-        top: 0.125rem;
-        bottom: 0.125rem;
-        left: 0;
-        width: 1px;
-        background: var(--border-seam);
       }
 
       .console-thread-group-label {
