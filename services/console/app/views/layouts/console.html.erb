@@ -1727,20 +1727,6 @@
           </div>
 
           <% if acting_admin? %>
-            <%# Right-click menu for sidebar threads (bb's context popup). Actions
-                are limited to what the deployment can actually do: open, open in
-                Slack, copy link, and archive (a local hide). There is no session
-                delete in the API, so none is offered. %>
-            <div class="console-thread-context" data-console-thread-context hidden role="menu">
-              <div class="console-thread-context-title" data-console-context-title></div>
-              <button type="button" class="console-thread-context-item" data-console-context-action="open" role="menuitem">Open</button>
-              <button type="button" class="console-thread-context-item" data-console-context-action="pane" role="menuitem">Open in split pane</button>
-              <button type="button" class="console-thread-context-item" data-console-context-action="slack" role="menuitem">Open in Slack</button>
-              <button type="button" class="console-thread-context-item" data-console-context-action="copy" role="menuitem">Copy link</button>
-              <div class="console-thread-context-sep"></div>
-              <button type="button" class="console-thread-context-item" data-console-context-action="archive" role="menuitem">Archive</button>
-            </div>
-
             <div class="console-thread-group">
               <a href="<%= console_workflows_path %>"
                  class="console-thread-group-title <%= "console-thread-group-title-active" if workflows_view %>"
@@ -1899,6 +1885,20 @@
       </main>
 
       <div class="console-scrim" data-console-nav-scrim aria-hidden="true"></div>
+    </div>
+
+    <%# Right-click menu for sidebar threads (bb's context popup). Actions
+        are limited to what the deployment can actually do: open, open in
+        Slack, copy link, and archive (a local hide). There is no session
+        delete in the API, so none is offered. %>
+    <div class="console-thread-context" data-console-thread-context hidden role="menu">
+      <div class="console-thread-context-title" data-console-context-title></div>
+      <button type="button" class="console-thread-context-item" data-console-context-action="open" role="menuitem">Open</button>
+      <button type="button" class="console-thread-context-item" data-console-context-action="pane" role="menuitem">Open in split pane</button>
+      <button type="button" class="console-thread-context-item" data-console-context-action="slack" role="menuitem">Open in Slack</button>
+      <button type="button" class="console-thread-context-item" data-console-context-action="copy" role="menuitem">Copy link</button>
+      <div class="console-thread-context-sep"></div>
+      <button type="button" class="console-thread-context-item" data-console-context-action="archive" role="menuitem">Archive</button>
     </div>
 
     <script>
