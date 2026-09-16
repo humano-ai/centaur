@@ -351,6 +351,23 @@ module ApplicationHelper
     )
   end
 
+  # Channel a thread belongs to, used to group the sidebar the way bb groups
+  # by workspace: the Slack conversation name when the ingress recorded one,
+  # else the raw channel id, else the thread-key namespace.
+  def console_sidebar_thread_group(session)
+    name = session.metadata_hash["slack_conversation_name"].presence
+    return "##{name.delete_prefix("#")}" if name
+
+    key = session.thread_key.to_s
+    case key
+    when /\Aslack:([^:]+)/ then "##{Regexp.last_match(1)}"
+    when /\Acli:/ then "CLI"
+    when /\Awf:/, /\Aworkflow/ then "Workflows"
+    when /\Agithub-manage:/ then "GitHub"
+    else "Other"
+    end
+  end
+
   def console_sidebar_thread_title(session, latest_message = nil)
     # sessions.title is the title api-rs generates on message append; prefer it
     # over metadata heuristics. Guarded because snapshots mirrored before the

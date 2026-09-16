@@ -294,9 +294,10 @@
         grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 0.5rem;
-        border-radius: 0.875rem;
-        padding: 0.55rem 0.75rem 0.55rem 2.5rem;
-        color: var(--primary);
+        border-radius: var(--radius-md);
+        padding: 0.25rem 0.5rem;
+        color: var(--muted-foreground);
+        font-size: var(--text-sm, 0.8125rem);
         text-decoration: none;
         transition: background 120ms ease, color 120ms ease;
       }
@@ -309,38 +310,42 @@
         color: var(--foreground);
       }
 
-      .console-thread-link-open::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 1.35rem;
-        height: 0.3rem;
-        width: 0.3rem;
-        transform: translateY(-50%);
-        border-radius: 999px;
-        background: var(--primary);
+      .console-thread-link-open[data-console-pane-index] {
+        padding-left: 1.5rem;
       }
 
       .console-thread-link-open[data-console-pane-index]::before {
         content: attr(data-console-pane-index);
-        left: 1.05rem;
-        height: auto;
-        width: auto;
-        border-radius: 0;
-        background: none;
+        position: absolute;
+        top: 50%;
+        left: 0.5rem;
+        transform: translateY(-50%);
         color: var(--foreground);
         font-size: 0.6875rem;
         font-weight: 700;
         line-height: 1;
       }
 
+      .console-thread-group-label {
+        padding: 0.5rem 0.5rem 0.125rem;
+        color: var(--subtle-foreground);
+        font-size: var(--text-2xs, 0.625rem);
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .console-thread-group-label:first-child {
+        padding-top: 0.25rem;
+      }
+
       .console-thread-link:hover {
-        background: var(--overlay-1);
+        background: var(--state-hover);
         color: var(--foreground);
       }
 
       .console-thread-link-active {
-        background: var(--overlay-2);
+        background: var(--state-active);
         color: var(--foreground);
       }
 
@@ -1089,20 +1094,24 @@
       /* The picker sits just left of the send button, so the popover hangs
          from its right edge. It scrolls when the composer script caps its
          height to keep it inside the viewport. */
+      /* The trigger is a narrow text control, so the menu hangs from its LEFT
+         edge and opens upward — a right-anchored menu ran off to the left of
+         the composer, outside the content column. */
       .console-composer-model-menu {
-        top: calc(100% + 0.4rem);
-        right: 0;
-        bottom: auto;
-        left: auto;
+        top: auto;
+        right: auto;
+        bottom: calc(100% + 0.4rem);
+        left: 0;
         width: 15rem;
+        max-width: calc(100vw - 2rem);
         overflow-y: auto;
       }
 
       /* Flipped by the composer script when the space below the pill can't
          fit the menu (docked composers sit at the bottom of the window). */
       .console-composer-model-menu--above {
-        top: auto;
-        bottom: calc(100% + 0.4rem);
+        top: calc(100% + 0.4rem);
+        bottom: auto;
       }
 
       /* Root rows of the picker menu: setting name left, current value and a
