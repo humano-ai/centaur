@@ -96,7 +96,7 @@ if [ -n "$UPSTREAM_URL" ]; then
     git -C "$DEST" remote set-url origin "$UPSTREAM_URL"
 fi
 
-BRANCH="centaur/$SLUG-$(date +%s)"
+BRANCH="${CENTAUR_BRANCH_PREFIX:-fyndry}/$SLUG-$(date +%s)"
 git -C "$DEST" checkout -q -b "$BRANCH"
 
 configure_git_identity
