@@ -114,6 +114,9 @@ module ApplicationHelper
   # lucide (ISC) icon bodies, matching the icon set t3code uses. Rendered by
   # lucide_icon with lucide's own 24x24 / stroke-width 2 / round-cap geometry.
   LUCIDE_ICONS = {
+    "hash" => %q(<!-- lucide hash --><svg class="lucide lucide-hash" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <line x1="4" x2="20" y1="9" y2="9" /> <line x1="4" x2="20" y1="15" y2="15" /> <line x1="10" x2="8" y1="3" y2="21" /> <line x1="16" x2="14" y1="3" y2="21" />),
+    "chevron-down" => %q(<!-- lucide chevron-down --><svg class="lucide lucide-chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m6 9 6 6 6-6" />),
+    "lock" => %q(<!-- lucide lock --><svg class="lucide lucide-lock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" />),
     "corner-down-left" => %q(<!-- lucide corner-down-left --><svg class="lucide lucide-corner-down-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 4v7a4 4 0 0 1-4 4H4" /> <path d="m9 10-5 5 5 5" />),
     "square" => %q(<!-- lucide square --><svg class="lucide lucide-square" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" />),
     "mic" => %q(<!-- lucide mic --><svg class="lucide lucide-mic" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 19v3" /> <path d="M19 10v2a7 7 0 0 1-14 0v-2" /> <rect x="9" y="2" width="6" height="13" rx="3" />),
@@ -356,11 +359,11 @@ module ApplicationHelper
   # else the raw channel id, else the thread-key namespace.
   def console_sidebar_thread_group(session)
     name = session.metadata_hash["slack_conversation_name"].presence
-    return "##{name.delete_prefix("#")}" if name
+    return name.delete_prefix("#") if name
 
     key = session.thread_key.to_s
     case key
-    when /\Aslack:([^:]+)/ then "##{Regexp.last_match(1)}"
+    when /\Aslack:([^:]+)/ then Regexp.last_match(1)
     when /\Acli:/ then "CLI"
     when /\Awf:/, /\Aworkflow/ then "Workflows"
     when /\Agithub-manage:/ then "GitHub"

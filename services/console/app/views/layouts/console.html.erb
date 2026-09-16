@@ -332,6 +332,64 @@
         background: var(--border-seam);
       }
 
+      .console-channel-toggle {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 0.25rem;
+        border-radius: var(--radius-md);
+        padding: 0.25rem 0.5rem;
+        color: var(--muted-foreground);
+        font-size: var(--text-sm, 0.8125rem);
+        font-weight: 500;
+        text-align: left;
+        transition: background 180ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms;
+      }
+
+      .console-channel-toggle:hover {
+        background: var(--state-hover);
+        color: var(--foreground);
+      }
+
+      .console-channel-caret {
+        display: grid;
+        place-items: center;
+        color: var(--subtle-foreground);
+        transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .console-channel-toggle[aria-expanded="false"] .console-channel-caret {
+        transform: rotate(-90deg);
+      }
+
+      .console-channel-hash {
+        display: grid;
+        place-items: center;
+        color: var(--subtle-foreground);
+      }
+
+      .console-channel-name {
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .console-channel-count {
+        color: var(--subtle-foreground);
+        font-size: var(--text-2xs, 0.625rem);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .console-channel-threads[hidden] {
+        display: none;
+      }
+
+      .console-channel-threads {
+        padding-left: 0.75rem;
+      }
+
       .console-thread-group-label {
         padding: 0.5rem 0.5rem 0.125rem;
         color: var(--subtle-foreground);
@@ -1559,7 +1617,7 @@
               <%= image_tag "/icon.svg", alt: "", aria: { hidden: true }, width: 275, height: 275 %>
             </span>
             <span class="console-brand-lockup">
-              <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 497, height: 127 %>
+              <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 1766, height: 533 %>
             </span>
           </a>
         </div>
@@ -1741,7 +1799,7 @@
             <%= console_icon("menu", classes: "size-5") %>
           </button>
           <a href="<%= root_path %>" class="console-mobile-brand" aria-label="Fyndry Console">
-            <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 497, height: 127 %>
+            <%= image_tag "fyndry-lockup-white.svg", alt: "Fyndry", class: "glow", width: 1766, height: 533 %>
           </a>
         </div>
         <div class="<%= threads_view ? "console-main-thread-frame" : "console-main-page" %>">
@@ -1847,6 +1905,51 @@
       })();
 
       (() => {
+        // Channel disclosures in the thread sidebar. Collapsed channels are
+        // remembered so the sidebar looks the same across visits.
+        const CHANNEL_COLLAPSE_KEY = "console:collapsed-channels";
+        const collapsedChannels = () => {
+          try {
+            const raw = window.localStorage.getItem(CHANNEL_COLLAPSE_KEY);
+            return new Set(raw ? JSON.parse(raw) : []);
+          } catch {
+            return new Set();
+          }
+        };
+        const persistCollapsedChannels = set => {
+          try {
+            window.localStorage.setItem(CHANNEL_COLLAPSE_KEY, JSON.stringify([...set]));
+          } catch {
+            /* private mode: the toggle still works for this page */
+          }
+        };
+        const syncChannelGroups = () => {
+          const collapsed = collapsedChannels();
+          document.querySelectorAll("[data-console-channel-group]").forEach(group => {
+            const name = group.getAttribute("data-console-channel-group");
+            const toggle = group.querySelector("[data-console-channel-toggle]");
+            const threads = group.querySelector("[data-console-channel-threads]");
+            if (!toggle || !threads) return;
+            const isCollapsed = collapsed.has(name);
+            toggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+            threads.hidden = isCollapsed;
+          });
+        };
+        document.addEventListener("click", event => {
+          const toggle = event.target.closest("[data-console-channel-toggle]");
+          if (!toggle) return;
+          const group = toggle.closest("[data-console-channel-group]");
+          const name = group?.getAttribute("data-console-channel-group");
+          if (!name) return;
+          const collapsed = collapsedChannels();
+          collapsed.has(name) ? collapsed.delete(name) : collapsed.add(name);
+          persistCollapsedChannels(collapsed);
+          syncChannelGroups();
+        });
+        document.addEventListener("turbo:load", syncChannelGroups);
+        document.addEventListener("turbo:frame-load", syncChannelGroups);
+        syncChannelGroups();
+
         const themeToggle = document.querySelector("[data-console-theme-toggle]");
         if (!themeToggle) return;
 

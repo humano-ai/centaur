@@ -13,7 +13,21 @@
     <% grouped = @console_sidebar_threads.group_by { |thread| console_sidebar_thread_group(thread) } %>
     <% index = -1 %>
     <% grouped.each do |group_label, group_threads| %>
-      <div class="console-thread-group-label"><%= group_label %></div>
+      <%# Slack-style channel row that toggles its threads, like bb's
+          project/folder disclosures. Collapsed state is remembered per channel
+          in localStorage by the console layout's script. %>
+      <div class="console-channel-group" data-console-channel-group="<%= group_label %>">
+        <button type="button"
+                class="console-channel-toggle"
+                aria-expanded="true"
+                data-console-channel-toggle
+                title="<%= group_label %>">
+          <span class="console-channel-caret" aria-hidden="true"><%= console_icon("chevron-down", classes: "size-3") %></span>
+          <span class="console-channel-hash" aria-hidden="true"><%= console_icon("hash", classes: "size-3.5") %></span>
+          <span class="console-channel-name"><%= group_label %></span>
+          <span class="console-channel-count"><%= group_threads.size %></span>
+        </button>
+        <div class="console-channel-threads" data-console-channel-threads>
       <% group_threads.each do |thread| %>
         <% index += 1 %>
       <%# Open threads carry their 1-based pane number, rendered as a small
@@ -35,6 +49,8 @@
         <span class="console-thread-time"><%= local_time(thread.updated_at || thread.created_at, relative: true, format: :compact) %></span>
         <% end %>
       <% end %>
+        </div>
+      </div>
     <% end %>
     <% if @console_sidebar_threads.size > 5 %>
       <button type="button"
