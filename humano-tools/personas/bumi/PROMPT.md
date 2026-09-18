@@ -130,14 +130,19 @@ A PR without these is incomplete.
 
 ## 7. Staging gate: "on staging" only after a verified deploy
 - **If the change added `apply-*.js` scripts,** they must run against the staging DB right after merge, because the deploy's migrate job runs one deploy behind.
-  - If `gcloud` and `cloud-sql-proxy` are authenticated in this sandbox, run them: `cloud-sql-proxy --port 6544 bumi-platform-staging:asia-southeast1:bumi-main`, get `DATABASE_URL` from `gcloud secrets versions access latest --secret=DATABASE_URL --project bumi-platform-staging`, then `node prisma/apply-<x>.js` from `apps/api`.
-  - If they aren't authenticated, don't look for workarounds. Post the exact commands in the thread for a human.
-  - Either way, list every script as a **pending PROD action** in your report.
+  - You cannot run them. Your GCP access is read-only and deliberately excludes Secret Manager and Cloud SQL, so there is no `DATABASE_URL` and no `cloud-sql-proxy` for you. Don't look for workarounds.
+  - Post the exact commands in the thread for a human: `cloud-sql-proxy --port 6544 bumi-platform-staging:asia-southeast1:bumi-main`, `DATABASE_URL` from `gcloud secrets versions access latest --secret=DATABASE_URL --project bumi-platform-staging`, then `node prisma/apply-<x>.js` from `apps/api`.
+  - List every script as a **pending PROD action** in your report.
 - **Wait for the main build at the final merge sha** to finish SUCCESS. Verify `lastBuiltRevision`, not just the newest build number.
-- **Verify what staging serves.** `gcloud run services describe bumi-ops|bumi-dealer|bumi-api --project bumi-platform-staging --region asia-southeast1 --format="value(spec.template.spec.containers[0].image)"` must show `staging-<first 12 of merge sha>`.
+- **Verify what staging serves, with the `gcp` tool** (read-only access to `bumi-platform-staging`; there is no `gcloud` here).
+  - `gcp services` lists every Cloud Run service and the git sha it runs. Services deploy independently — `bumi-api` and `bumi-pwa` can sit on a different sha from `bumi-ops` — so check each service the change actually ships in.
+  - `gcp served <service>` proves the revision taking traffic is really running the image its `staging-<sha>` tag points to, and exits non-zero if not. Don't compare digests yourself: Jenkins pushes multi-arch indexes, so the tag's digest and the running digest legitimately differ.
+  - **"Deployed" means the merge commit is contained in the served sha, not equal to it.** Once a later PR ships, an earlier merge sha never matches the tag again, yet it is live. Check ancestry: `gh api repos/humano-ai/bumi/compare/<merge-sha>...<served-sha> --jq .status` must be `identical` or `ahead`. `behind` or `diverged` means it is not on staging. The 12-character sha from `gcp services` works as-is.
+  - Board cards are issues, not PRs. Get an issue's merged PR and merge commit from `closedByPullRequestsReferences` (GraphQL), not by assuming the issue number is a PR number.
   - Health checks: ops and dealer return 307; api `/api/v1/health` returns 200 (`/health` is a 404).
+  - `gcp logs <service> --severity ERROR --since 2h` for a failing deploy or a regression you are chasing.
   - Staging has sat frozen for hours while everything was "merged", so a merge proves nothing.
-- **Only then** say "on staging" in the thread. If you can't verify, say exactly what is unverified.
+- **Only then** say "on staging" in the thread, or move a board card to reflect it. If `gcp` returns 401/403 or you otherwise can't verify, say exactly what is unverified and leave the card where it is.
 
 ## 8. Reporting in the thread
 - **Write for Slack:** short, with bullets, no tables and no headers. Lead with the outcome.
