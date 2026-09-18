@@ -1,0 +1,5 @@
+[Unit]
+Description=Refresh Fyndry's read-only bumi staging GCP token in Centaur Console
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/foundry-gcp-token

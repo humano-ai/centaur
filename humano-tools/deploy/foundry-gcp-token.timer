@@ -1,0 +1,7 @@
+[Unit]
+Description=Refresh Fyndry's GCP token every 20 minutes
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=20min
+[Install]
+WantedBy=timers.target
